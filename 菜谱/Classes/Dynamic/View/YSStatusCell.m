@@ -14,6 +14,8 @@
 
 // cell中所有的判断必须全面, 否则信息会部队称
 
+#import "YSMessageModel.h"
+
 @interface YSStatusCell ()
 
 /** 头像按钮 */
@@ -57,6 +59,24 @@
     
     self.btnHead.layer.cornerRadius = 25.0;
     self.btnHead.layer.masksToBounds = YES;
+}
+
+- (void)setMessageModel:(YSMessageModel *)messageModel{
+    _messageModel = messageModel;
+    
+    self.lblName.text = messageModel.userInfo.userID;
+    self.lblContent.text = messageModel.content;
+//    self.lblTime.text = messageModel.createdAt;
+//    self.lblSource.text = messageModel.updatedAt;
+    self.lblRetweetContent.text = nil;
+    
+    // 如果有图片就设置图片
+//    [self loadImageURLs:status.arrPicUrls forView:self.viewContentImages];
+    [self loadImageURLs:nil forView:self.viewRetweetImages];
+    
+    self.lcBottomRetweetImage.constant = 0;
+    self.lcBottomRetweetContent.constant = 0;
+    
 }
 
 - (void)setStatus:(YSStatusModel *)status {
@@ -131,6 +151,7 @@
     // 添加ImageView
     for (NSUInteger index = 0; index < count; index ++) {
         UIImageView *imageView = [UIImageView new];
+        
         [imageView sd_setImageWithURL:[NSURL URLWithString:arrURLs[index][@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"social-placeholder"]];
         [view addSubview:imageView];
         CGFloat X = space + (index % lineCount) * (width + space);

@@ -14,6 +14,7 @@
 
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 
+#import "YSMessage.h"
 @interface AppDelegate () <BMKGeneralDelegate>
 
 /** 创建的一个百度地图的管理*/
@@ -39,10 +40,10 @@
     
     // 如果使用美国站点，请加上下面这行代码：
     // [AVOSCloud setServiceRegion:AVServiceRegionUS];
-    
+    [YSMessage registerSubclass];
     [AVOSCloud setApplicationId:@"6WuwHq3DabgyOgPq2V1H5yON-gzGzoHsz" clientKey:@"AwRSis2jueemKU9EbdFoXHVp"];
     
-    // 初始化管理器
+    // 初始化百度地图的管理器
     self.bManager = [[BMKMapManager alloc] init];
     [self.bManager start:@"EnfK2yfbCMbCXBkjmVTVT1OQ2CKGAREe" generalDelegate:self];
     
@@ -66,11 +67,11 @@
 
 //联网状态
 -(void)onGetNetworkState:(int)iError{
-    NSLog(@"network:%d",iError);
+//    NSLog(@"network:%d",iError);
 }
 //授权状态
 -(void)onGetPermissionState:(int)iError{
-    NSLog(@"permission:%d", iError);
+//    NSLog(@"permission:%d", iError);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

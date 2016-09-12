@@ -13,44 +13,81 @@
 #import "YSStatusCell.h"
 #import "YSFooterView.h"
 
+#import "YSMessageModel.h"
+
 @interface YSDynamicViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, copy) NSArray *arrDataModels;
+@property (nonatomic, strong) NSMutableArray *arrDataModels;
 
 @end
 
 @implementation YSDynamicViewController
 
-- (NSArray *)arrDataModels{
-    if (!_arrDataModels) {
-        NSString *strFilePath=[[NSBundle mainBundle] pathForResource:@"status" ofType:@"plist"];
-        NSDictionary *dicStatuses=[NSDictionary dictionaryWithContentsOfFile:strFilePath];
-        NSArray *arrStatuses=dicStatuses[@"statuses"];
-        NSMutableArray *arrMStatusModels=[NSMutableArray arrayWithCapacity:arrStatuses.count];
-        for (NSDictionary *dicData in arrStatuses) {
-            YSStatusModel *status = [YSStatusModel statusModelWithDictionary:dicData];
-            [arrMStatusModels addObject:status];
-        }
-        _arrDataModels = [arrMStatusModels copy];
 
-    }
-    return _arrDataModels;
-}
+//- (NSArray *)arrDataModels{
+//    if (!_arrDataModels) {
+//        NSString *strFilePath=[[NSBundle mainBundle] pathForResource:@"status" ofType:@"plist"];
+//        NSDictionary *dicStatuses=[NSDictionary dictionaryWithContentsOfFile:strFilePath];
+//        NSArray *arrStatuses=dicStatuses[@"statuses"];
+//        NSMutableArray *arrMStatusModels=[NSMutableArray arrayWithCapacity:arrStatuses.count];
+//        for (NSDictionary *dicData in arrStatuses) {
+//            YSStatusModel *status = [YSStatusModel statusModelWithDictionary:dicData];
+//            [arrMStatusModels addObject:status];
+//        }
+//        _arrDataModels = [arrMStatusModels copy];
+//
+//    }
+//    return _arrDataModels;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadDefaultSetting];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+//    [self text];
+}
+
+- (void)text{
+//    [[AVUser currentUser] setObject:nil forKey:@"MessageData"];
+    NSArray *arr = [[AVUser currentUser] objectForKey:@"MessageData"];
+    NSLog(@">>>>>%@",arr);
+    NSUInteger count = arr.count;
+    if (count == 0) {
+        UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"信息为0...." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            
+        }];
+        [alertContorller addAction:alertAction];
+        [self presentViewController:alertContorller animated:YES completion:nil];
+        return ;
+    }
+//    NSMutableArray *arrMDatas = [NSMutableArray arrayWithCapacity:count];
+    self.arrDataModels = [NSMutableArray arrayWithCapacity:count];
+    for (NSUInteger index = 0; index < count; index ++) {
+        NSString *str = arr[index];
+        AVQuery *query = [AVQuery queryWithClassName:@"Message"];
+        
+        [query getObjectInBackgroundWithId:str block:^(AVObject *object, NSError *error) {
+            if (object) {
+                YSMessageModel *model = [YSMessageModel messageModelWithDictionary:(NSDictionary *)object];
+                [self.arrDataModels addObject:model];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self.tableView reloadData];
+                });
+                
+            }
+        }];
+    }
+}
+
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
     self.view.backgroundColor = [UIColor greenColor];
-//    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(80, 100, 200, 200)];
-//    [self.view addSubview:lable];
-//    lable.numberOfLines = 0;
-//    lable.text = @"展示关注的好友的动态，以及自己发表的动态";
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -64,6 +101,7 @@
 
 #pragma mark  > UITableViewDataSource -- UITableViewDelegate<
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSLog(@"<<<<>>>%ld",self.arrDataModels.count);
     return self.arrDataModels.count;
 }
 
@@ -73,15 +111,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     YSStatusCell *statusCell = [YSStatusCell cellWithTableView:tableView];
-    YSStatusModel *status = self.arrDataModels[indexPath.section];
-    statusCell.status = status;
+//    YSStatusModel *status = self.arrDataModels[indexPath.section];
+    YSMessageModel *model = self.arrDataModels[indexPath.section];
+//    NSLog(@"model>>%@",model.content);
+    statusCell.messageModel = model;
+//    statusCell.status = status;
     return statusCell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     YSFooterView *footer = [YSFooterView footerViewWithTableView:tableView];
     footer.contentView.backgroundColor = [UIColor whiteColor];
-    footer.status = self.arrDataModels[section];
+//    footer.status = self.arrDataModels[section];
     return footer;
 }
 

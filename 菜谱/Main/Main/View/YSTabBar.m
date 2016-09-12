@@ -6,11 +6,6 @@
 //  Copyright © 2016年 qingyun. All rights reserved.
 //
 
-/** Color Related */
-#define QLColorWithRGB(redValue, greenValue, blueValue) ([UIColor colorWithRed:((redValue)/255.0) green:((greenValue)/255.0) blue:((blueValue)/255.0) alpha:1])
-#define QLColorRandom QLColorWithRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
-#define QLColorFromHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 #import "YSTabBar.h"
 
 @implementation YSTabBar
@@ -37,12 +32,11 @@
 /** 通用的初始化方法(不管从xib加载还是纯代码创建都会调用这个方法) */
 - (void)loadDefaultSetting {
     UIButton *btnPlus = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnPlus setImage:[UIImage imageNamed:@"tabbar_compose_icon_add"] forState:UIControlStateNormal];
-    [btnPlus setImage:[UIImage imageNamed:@"tabbar_compose_icon_add_highlighted"] forState:UIControlStateHighlighted];
-    [btnPlus setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button"] forState:UIControlStateNormal];
-    [btnPlus setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button_highlighted"] forState:UIControlStateHighlighted];
+    [btnPlus setImage:[UIImage imageNamed:@"btn_card"] forState:UIControlStateNormal];
+    [btnPlus setImage:[UIImage imageNamed:@"btn_card"] forState:UIControlStateHighlighted];
+//    [btnPlus setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button"] forState:UIControlStateNormal];
+//    [btnPlus setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button_highlighted"] forState:UIControlStateHighlighted];
     [btnPlus addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchDown];
-    //btnPlus.frame = CGRectMake(0, 0, 40, 40);
     [btnPlus sizeToFit];
     [self addSubview:btnPlus];
     _btnPlus = btnPlus;
@@ -50,7 +44,6 @@
 
 #pragma mark  > 点击加号按钮触发的事件 <
 - (void)tapAction:(UIButton *)button {
-//    NSLog(@"%s", __func__);
     if (self.blkTapThePlusBtn) {
         self.blkTapThePlusBtn(button);
     }

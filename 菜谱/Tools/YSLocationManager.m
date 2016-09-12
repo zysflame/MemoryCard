@@ -58,6 +58,10 @@
     [self.locationService startUserLocationService];
 }
 
+- (void)stopTheLocationService{
+    [self.locationService stopUserLocationService];
+}
+
 #pragma mark  > BMKLocationServiceDelegate 定位后调用的方法 <
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
     // 把获取到的位置赋值给当前位置
@@ -67,13 +71,13 @@
         self.blkLocationUpdate(userLocation.location.coordinate);
     }
     // 定位成功后上传位置信息   --- 雷达定位需要用到的自己的位置
-    BMKRadarUploadInfo *info = [[BMKRadarUploadInfo alloc] init];
-    // 指定位置的信息
-    info.pt = userLocation.location.coordinate;
-    info.extInfo = @"我";
-    // 上传信息 --- 开始上传的结果
-    BOOL result = [self.radarManager uploadInfoRequest:info];
-    NSLog(@"开始上传的结果是>>>%d",result);
+//    BMKRadarUploadInfo *info = [[BMKRadarUploadInfo alloc] init];
+//    // 指定位置的信息
+//    info.pt = userLocation.location.coordinate;
+//    info.extInfo = @"我";
+//    // 上传信息 --- 开始上传的结果
+//    BOOL result = [self.radarManager uploadInfoRequest:info];
+//    NSLog(@"开始上传的结果是>>>%d",result);
 }
 
 #pragma mark  > BMKRadarManagerDelegate --- 上传用户信息后得到的结果 <
@@ -100,29 +104,29 @@
         }
         return;
     }
-    //处理结果
-    NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:result.totalNum];
-    // pageNum 总页数
-    for (NSUInteger index = 0; index < result.pageNum; index ++) {
-        result.pageIndex = index;
-        [resultArray addObjectsFromArray:result.infoList];
-    }
+//    //处理结果
+//    NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:result.totalNum];
+//    // pageNum 总页数
+//    for (NSUInteger index = 0; index < result.pageNum; index ++) {
+//        result.pageIndex = index;
+//        [resultArray addObjectsFromArray:result.infoList];
+//    }
     // 将所有对象转化为model
-    NSMutableArray *modelArray = [NSMutableArray arrayWithCapacity:resultArray.count];
-    for (BMKRadarNearbyInfo *info in resultArray){
+//    NSMutableArray *modelArray = [NSMutableArray arrayWithCapacity:resultArray.count];
+//    for (BMKRadarNearbyInfo *info in resultArray){
 //        UserInfo *user = [[UserInfo alloc] init];
 //        user.userID = info.userId;
         
         //将经纬度转化为cllocation,计算距离
-        CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:info.pt.latitude longitude:info.pt.longitude];
+//        CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:info.pt.latitude longitude:info.pt.longitude];
         //用户的位置距离的计算
 //         user.distanse = [self.currentLocation distanceFromLocation:userLocation];
 //        [modelArray addObject:user];
-    }
+//    }
     
-    if (self.blkRadarNear) {
-        self.blkRadarNear(modelArray);
-    }
+//    if (self.blkRadarNear) {
+//        self.blkRadarNear(modelArray);
+//    }
 }
 
 - (void)dealloc{

@@ -17,13 +17,20 @@
 #import "YSFooterView.h"
 #import "YSStatusModel.h"
 
+#import "YSHTTPRequestManager.h"
+
+#import "YSCarouselImageView.h"
+#import "UIView+Frame.h"
+
 static NSInteger page = 1;
-@interface YSHomeViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface YSHomeViewController () <UITableViewDelegate,UITableViewDataSource,YSCarouselImageViewDelegate>
 /** tableView 视图*/
 @property (nonatomic, weak) UITableView *tableView;
 
 /** 存放模型的数组*/
 @property (nonatomic, strong) NSMutableArray *arrDataModels;
+@property (nonatomic,weak) YSCarouselImageView *carouselImageView;
+
 
 @end
 
@@ -45,23 +52,38 @@ static NSInteger page = 1;
     return _arrDataModels;
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+//    [self requestInformation];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNavigationSetting];
     [self loadDefaultSetting];
+//    [self text];
+}
+
+- (void)text{
+    NSString *str = [[AVUser currentUser] objectForKey:@"ResponseObject"];
+    NSLog(@"str>>%@",str);
+    AVQuery *query = [AVQuery queryWithClassName:@"ResponseObject"];
+    [query getObjectInBackgroundWithId:str block:^(AVObject *object, NSError *error) {
+        NSLog(@"%@>>>>%@",object,object.allKeys);
+    }];
 }
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
-    self.view.backgroundColor = YSColorRandom;
+    self.view.backgroundColor = [UIColor whiteColor];
 //    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+//    CGRect tableViewFrame = CGRectMake(0, 200, YSScreenWidth, YSScreenHeight - 200);
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
+    
     tableView.dataSource = self;
     tableView.delegate = self;
     self.tableView = tableView;
+    
     tableView.sectionFooterHeight = 30;
     tableView.estimatedRowHeight = 40;
 //    __weak typeof(self) weakSelf = self;
@@ -71,8 +93,40 @@ static NSInteger page = 1;
 //    [self.tableView addGifRefreshFooterWithClosure:^{
 //        [weakSelf loadNewData];
 //    }];
+    
+    NSArray *imgNames = @[@"http://www.dns001.com/uploads/allimg/160403/19292I293-3.jpg",
+                          
+                          @"http://img.wallpapersking.com/800/2012-8/20120812103710.jpg",
+                          
+                          @"http://www.517europe.com.cn/upload/2014/08/201408061251224341.jpg",
+                          
+                          @"http://test.beiguoyou.com/upfiles/2014-11-26/e81864232f494af3986d0bcd10325afc0.jpg",
+                          
+                          @"http://www.xcghj.gov.cn/upimage/20131127142139.JPG"
+                          ];
+    
+    YSCarouselImageView *carouselImageView = [[YSCarouselImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200) withBannerSource:DGBBannerStyleOnlyWebSource withBannerArray:imgNames];
+    carouselImageView.showPageControl = YES;
+    carouselImageView.delegate = self;
+    carouselImageView.timeInterval = 3;
+    tableView.tableHeaderView = carouselImageView;
+    self.carouselImageView = carouselImageView;
 
 }
+
+#pragma mark  > 拖动图片的操作 <
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsety = scrollView.contentOffset.y - (-210);
+    CGFloat y = 10 - offsety;
+    self.carouselImageView.y = y;
+}
+
+- (void)dgbCarouselImageView:(YSCarouselImageView *)carouselImageView didSelectItemAtIndex:(NSInteger)index {
+    // 点击图片触发的事件
+    NSLog(@"%ld点击了图片的下标",index);
+    
+}
+
 #pragma mark  > 刷新加载新的数据 <
 - (void)loadNewData{
     page += 1;
@@ -86,29 +140,34 @@ static NSInteger page = 1;
 
 #pragma mark  > 发送网络请求 <
 - (void)requestInformation{
-    NSString *strURL = @"http://www.fotoplace.cc/api/square/hot_post_list.do?osType=android4.4.4-XiaomiMI%204LTE&uid=26102341";
-    NSDictionary *dicProgrma = @{@"page":@(page)};
+    NSString *strURL = @"http://restapi.amap.com/v3/place/around?key=c56887a1512d6e2d932fd294a8a0ed59&location=113.56503%2C34.819452&radius=5000&output=json&offset=50";
     
-    // 创建一个 HTTP管理
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    // 设置响应的接收类型
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",nil];
-     __weak typeof(self) weakSelf = self;
-    [manager POST:strURL parameters:dicProgrma success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSDictionary *dic = (NSDictionary *)responseObject;
-        NSDictionary *dicData = dic[@"data"];
-        NSArray *arrTemp = dicData[@"list"];
-        weakSelf.arrDataModels = [NSMutableArray arrayWithCapacity:arrTemp.count];
-        for (NSDictionary *dicList in arrTemp) {
-            YSHomeListModel *homeListModel = [YSHomeListModel homeListModelWithDictionary:dicList];
-            [weakSelf.arrDataModels addObject:homeListModel];
-        }
-        NSLog(@">>>>>arrData %ld",(unsigned long)weakSelf.arrDataModels.count);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
-        });
+    YSHTTPRequestManager *manager = [YSHTTPRequestManager sharedHTTPRequest];
+    NSDictionary *dic = @{@"uid":@"token"};
+    [manager GETWithURL:strURL withParam:dic andRequestSuccess:^(id responseObject) {
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@">>>%@",responseObject);
+        AVObject *response = [[AVObject alloc] initWithClassName:@"ResponseObject"];
+        
+        AVUser *currentUser = [AVUser currentUser];
+        [response setObject:currentUser.username forKey:@"userID"];
+        [response setObject:responseObject forKey:@"Response"];
+        
+        [response saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [[AVUser currentUser] setObject:response forKey:@"ResponseObject"];
+                [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    NSLog(@">>>%@",response);
+                    // 此处是修改数据
+                    [[AVUser currentUser] setObject:response.objectId forKey:@"ResponseObject"];
+                    [[AVUser currentUser] saveInBackground];
+                    
+                }];
+            }
+        }];
+        
+        
+    } andRequestFailure:^(NSError *error) {
         NSLog(@">>>>>请求失败");
         __weak typeof(self) weakSelf = self;
         UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"网络不好，请耐心等待" preferredStyle:UIAlertControllerStyleAlert];
@@ -121,8 +180,10 @@ static NSInteger page = 1;
         [alertContorller addAction:alertDengLuAction];
         [alertContorller addAction:alertAction];
         [self presentViewController:alertContorller animated:YES completion:nil];
+
     }];
     
+       
 }
 
 #pragma mark 加载导航栏设置

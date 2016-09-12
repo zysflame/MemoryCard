@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		121982DB2477D51E9E5D1B97 /* libPods-菜谱.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E4C20E4F4205211DFEFD82 /* libPods-菜谱.a */; };
-		CC2326801D66FFC8000EDC4B /* NSString+QYString.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2326681D66FFC8000EDC4B /* NSString+QYString.m */; };
+		CC02A4211D82647D007A5126 /* YSImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC02A4201D82647D007A5126 /* YSImageCollectionViewCell.m */; };
+		CC02A4231D826D00007A5126 /* YSImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC02A4221D826D00007A5126 /* YSImageCollectionViewCell.xib */; };
+		CC02A4251D826D77007A5126 /* YSButtonCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC02A4241D826D77007A5126 /* YSButtonCollectionCell.xib */; };
+		CC02A42B1D82B825007A5126 /* YSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CC02A42A1D82B825007A5126 /* YSMessage.m */; };
+		CC066D301D7EC7FE00A23910 /* YSHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC066D2F1D7EC7FE00A23910 /* YSHTTPRequestManager.m */; };
 		CC2326811D66FFC8000EDC4B /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC23266A1D66FFC8000EDC4B /* arrow@2x.png */; };
 		CC2326821D66FFC8000EDC4B /* PINBaseRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CC23266C1D66FFC8000EDC4B /* PINBaseRefreshControl.m */; };
 		CC2326831D66FFC8000EDC4B /* PINAutoRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2326701D66FFC8000EDC4B /* PINAutoRefreshFooter.m */; };
@@ -35,7 +39,21 @@
 		CC3EB7871D64861F000E775B /* YSTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3EB7861D64861F000E775B /* YSTabBar.m */; };
 		CC5DFCFC1D76E32D0099A3CA /* YSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5DFCFB1D76E32D0099A3CA /* YSLocationManager.m */; };
 		CC6DC5C41D70802B000778BC /* YSAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6DC5C31D70802B000778BC /* YSAnnotation.m */; };
+		CC747E0D1D81569200B5B360 /* UIImage+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = CC747E0C1D81569200B5B360 /* UIImage+Image.m */; };
+		CC747E131D8159AD00B5B360 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = CC747E121D8159AD00B5B360 /* UIView+Frame.m */; };
+		CC747E661D818C5E00B5B360 /* YSImageclloecView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC747E651D818C5E00B5B360 /* YSImageclloecView.m */; };
+		CC747E6B1D819AB800B5B360 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC747E6A1D819AB800B5B360 /* Add.storyboard */; };
+		CC747E6E1D819D5500B5B360 /* YSSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC747E6D1D819D5500B5B360 /* YSSendMessageViewController.m */; };
 		CC75282E1D6EEB570024D105 /* YSInfoDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC75282D1D6EEB570024D105 /* YSInfoDynamicViewController.m */; };
+		CCAB06B91D843C080032FABA /* YSRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06B81D843C080032FABA /* YSRecommendViewController.m */; };
+		CCAB06BC1D8526E70032FABA /* YSProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06BB1D8526E70032FABA /* YSProductModel.m */; };
+		CCAB06C01D853DB70032FABA /* YSRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06BE1D853DB70032FABA /* YSRecommendTableViewCell.m */; };
+		CCAB06C11D853DB70032FABA /* YSRecommendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCAB06BF1D853DB70032FABA /* YSRecommendTableViewCell.xib */; };
+		CCAB06C41D854FB70032FABA /* YSRecommentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06C31D854FB70032FABA /* YSRecommentInfoViewController.m */; };
+		CCAB06CF1D8553CC0032FABA /* YSCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06CD1D8553CC0032FABA /* YSCommentTableViewCell.m */; };
+		CCAB06D01D8553CC0032FABA /* YSCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCAB06CE1D8553CC0032FABA /* YSCommentTableViewCell.xib */; };
+		CCAB06D31D855D610032FABA /* YSCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06D21D855D610032FABA /* YSCommentModel.m */; };
+		CCAB06D91D857C930032FABA /* YSRecommentImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAB06D81D857C930032FABA /* YSRecommentImageViewController.m */; };
 		CCD03B521D72E95400B47B51 /* registered.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD03B511D72E95400B47B51 /* registered.storyboard */; };
 		CCDFBAF11D6DC5C9000A16C9 /* YSEMaileRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCDFBAC41D6DC5C9000A16C9 /* YSEMaileRegisterViewController.xib */; };
 		CCDFBAF21D6DC5C9000A16C9 /* YSAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFBAC81D6DC5C9000A16C9 /* YSAddViewController.m */; };
@@ -52,23 +70,31 @@
 		CCDFBB061D6DC607000A16C9 /* YSCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCDFBAFE1D6DC607000A16C9 /* YSCommentCell.xib */; };
 		CCDFBB071D6DC607000A16C9 /* YSFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFBB001D6DC607000A16C9 /* YSFooterView.m */; };
 		CCDFBB081D6DC607000A16C9 /* YSFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCDFBB011D6DC607000A16C9 /* YSFooterView.xib */; };
-		CCDFBB111D6DC65E000A16C9 /* YSCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFBB0C1D6DC65E000A16C9 /* YSCommentModel.m */; };
 		CCDFBB121D6DC65E000A16C9 /* YSStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFBB0E1D6DC65E000A16C9 /* YSStatusModel.m */; };
 		CCDFBB131D6DC65E000A16C9 /* YSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFBB101D6DC65E000A16C9 /* YSUserModel.m */; };
-		CCEE49F71D7C08BA00C78CE5 /* YSUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEE49F61D7C08BA00C78CE5 /* YSUserInfoModel.m */; };
 		CCF3C29D1D75B7D6005EFAA9 /* YSEMaileRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C2961D75B7D6005EFAA9 /* YSEMaileRegisterViewController.m */; };
 		CCF3C29E1D75B7D6005EFAA9 /* YSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C2981D75B7D6005EFAA9 /* YSLoginViewController.m */; };
 		CCF3C29F1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C29A1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m */; };
 		CCF3C2A01D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C29C1D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m */; };
 		CCF79CB91D782A2000640965 /* YSResetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF79CB81D782A2000640965 /* YSResetPassWordViewController.m */; };
 		CCF79CBB1D782B3400640965 /* login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF79CBA1D782B3400640965 /* login.storyboard */; };
+		CCFE91AF1D80141F00E12C2B /* YSMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE91AE1D80141F00E12C2B /* YSMessageModel.m */; };
+		CCFE91B21D80308A00E12C2B /* YSUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE91B11D80308A00E12C2B /* YSUserInfoModel.m */; };
+		CCFE91B51D80327600E12C2B /* NSString+QYString.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE91B41D80327600E12C2B /* NSString+QYString.m */; };
+		CCFFDDEF1D83A28A00F09E96 /* YSCarouselImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFFDDEE1D83A28A00F09E96 /* YSCarouselImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B2D562325362028CEECAA5E5 /* Pods-菜谱.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-菜谱.debug.xcconfig"; path = "Pods/Target Support Files/Pods-菜谱/Pods-菜谱.debug.xcconfig"; sourceTree = "<group>"; };
 		C00245FB0598FDC358C8080C /* Pods-菜谱.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-菜谱.release.xcconfig"; path = "Pods/Target Support Files/Pods-菜谱/Pods-菜谱.release.xcconfig"; sourceTree = "<group>"; };
-		CC2326671D66FFC8000EDC4B /* NSString+QYString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QYString.h"; sourceTree = "<group>"; };
-		CC2326681D66FFC8000EDC4B /* NSString+QYString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QYString.m"; sourceTree = "<group>"; };
+		CC02A41F1D82647D007A5126 /* YSImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSImageCollectionViewCell.h; sourceTree = "<group>"; };
+		CC02A4201D82647D007A5126 /* YSImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSImageCollectionViewCell.m; sourceTree = "<group>"; };
+		CC02A4221D826D00007A5126 /* YSImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		CC02A4241D826D77007A5126 /* YSButtonCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSButtonCollectionCell.xib; sourceTree = "<group>"; };
+		CC02A4291D82B825007A5126 /* YSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMessage.h; sourceTree = "<group>"; };
+		CC02A42A1D82B825007A5126 /* YSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMessage.m; sourceTree = "<group>"; };
+		CC066D2E1D7EC7FE00A23910 /* YSHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHTTPRequestManager.h; sourceTree = "<group>"; };
+		CC066D2F1D7EC7FE00A23910 /* YSHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSHTTPRequestManager.m; sourceTree = "<group>"; };
 		CC23266A1D66FFC8000EDC4B /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		CC23266B1D66FFC8000EDC4B /* PINBaseRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PINBaseRefreshControl.h; sourceTree = "<group>"; };
 		CC23266C1D66FFC8000EDC4B /* PINBaseRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PINBaseRefreshControl.m; sourceTree = "<group>"; };
@@ -118,8 +144,33 @@
 		CC5DFCFB1D76E32D0099A3CA /* YSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLocationManager.m; sourceTree = "<group>"; };
 		CC6DC5C21D70802B000778BC /* YSAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSAnnotation.h; sourceTree = "<group>"; };
 		CC6DC5C31D70802B000778BC /* YSAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSAnnotation.m; sourceTree = "<group>"; };
+		CC747E0B1D81569200B5B360 /* UIImage+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Image.h"; sourceTree = "<group>"; };
+		CC747E0C1D81569200B5B360 /* UIImage+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Image.m"; sourceTree = "<group>"; };
+		CC747E111D8159AD00B5B360 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		CC747E121D8159AD00B5B360 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		CC747E641D818C5E00B5B360 /* YSImageclloecView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSImageclloecView.h; sourceTree = "<group>"; };
+		CC747E651D818C5E00B5B360 /* YSImageclloecView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSImageclloecView.m; sourceTree = "<group>"; };
+		CC747E6A1D819AB800B5B360 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
+		CC747E6C1D819D5500B5B360 /* YSSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSSendMessageViewController.h; sourceTree = "<group>"; };
+		CC747E6D1D819D5500B5B360 /* YSSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSSendMessageViewController.m; sourceTree = "<group>"; };
 		CC75282C1D6EEB570024D105 /* YSInfoDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSInfoDynamicViewController.h; sourceTree = "<group>"; };
 		CC75282D1D6EEB570024D105 /* YSInfoDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSInfoDynamicViewController.m; sourceTree = "<group>"; };
+		CCAB06B71D843C080032FABA /* YSRecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRecommendViewController.h; sourceTree = "<group>"; };
+		CCAB06B81D843C080032FABA /* YSRecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRecommendViewController.m; sourceTree = "<group>"; };
+		CCAB06BA1D8526E70032FABA /* YSProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSProductModel.h; sourceTree = "<group>"; };
+		CCAB06BB1D8526E70032FABA /* YSProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSProductModel.m; sourceTree = "<group>"; };
+		CCAB06BD1D853DB70032FABA /* YSRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRecommendTableViewCell.h; sourceTree = "<group>"; };
+		CCAB06BE1D853DB70032FABA /* YSRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRecommendTableViewCell.m; sourceTree = "<group>"; };
+		CCAB06BF1D853DB70032FABA /* YSRecommendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSRecommendTableViewCell.xib; sourceTree = "<group>"; };
+		CCAB06C21D854FB70032FABA /* YSRecommentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRecommentInfoViewController.h; sourceTree = "<group>"; };
+		CCAB06C31D854FB70032FABA /* YSRecommentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRecommentInfoViewController.m; sourceTree = "<group>"; };
+		CCAB06CC1D8553CC0032FABA /* YSCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCommentTableViewCell.h; sourceTree = "<group>"; };
+		CCAB06CD1D8553CC0032FABA /* YSCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCommentTableViewCell.m; sourceTree = "<group>"; };
+		CCAB06CE1D8553CC0032FABA /* YSCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSCommentTableViewCell.xib; sourceTree = "<group>"; };
+		CCAB06D11D855D610032FABA /* YSCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCommentModel.h; sourceTree = "<group>"; };
+		CCAB06D21D855D610032FABA /* YSCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCommentModel.m; sourceTree = "<group>"; };
+		CCAB06D71D857C930032FABA /* YSRecommentImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRecommentImageViewController.h; sourceTree = "<group>"; };
+		CCAB06D81D857C930032FABA /* YSRecommentImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRecommentImageViewController.m; sourceTree = "<group>"; };
 		CCD03B511D72E95400B47B51 /* registered.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = registered.storyboard; sourceTree = "<group>"; };
 		CCDFBAC41D6DC5C9000A16C9 /* YSEMaileRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSEMaileRegisterViewController.xib; sourceTree = "<group>"; };
 		CCDFBAC71D6DC5C9000A16C9 /* YSAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSAddViewController.h; sourceTree = "<group>"; };
@@ -147,14 +198,10 @@
 		CCDFBAFF1D6DC607000A16C9 /* YSFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFooterView.h; sourceTree = "<group>"; };
 		CCDFBB001D6DC607000A16C9 /* YSFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFooterView.m; sourceTree = "<group>"; };
 		CCDFBB011D6DC607000A16C9 /* YSFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YSFooterView.xib; sourceTree = "<group>"; };
-		CCDFBB0B1D6DC65E000A16C9 /* YSCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCommentModel.h; sourceTree = "<group>"; };
-		CCDFBB0C1D6DC65E000A16C9 /* YSCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCommentModel.m; sourceTree = "<group>"; };
 		CCDFBB0D1D6DC65E000A16C9 /* YSStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSStatusModel.h; sourceTree = "<group>"; };
 		CCDFBB0E1D6DC65E000A16C9 /* YSStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSStatusModel.m; sourceTree = "<group>"; };
 		CCDFBB0F1D6DC65E000A16C9 /* YSUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSUserModel.h; sourceTree = "<group>"; };
 		CCDFBB101D6DC65E000A16C9 /* YSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSUserModel.m; sourceTree = "<group>"; };
-		CCEE49F51D7C08BA00C78CE5 /* YSUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSUserInfoModel.h; sourceTree = "<group>"; };
-		CCEE49F61D7C08BA00C78CE5 /* YSUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSUserInfoModel.m; sourceTree = "<group>"; };
 		CCF3C2951D75B7D6005EFAA9 /* YSEMaileRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSEMaileRegisterViewController.h; sourceTree = "<group>"; };
 		CCF3C2961D75B7D6005EFAA9 /* YSEMaileRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSEMaileRegisterViewController.m; sourceTree = "<group>"; };
 		CCF3C2971D75B7D6005EFAA9 /* YSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSLoginViewController.h; sourceTree = "<group>"; };
@@ -166,6 +213,14 @@
 		CCF79CB71D782A2000640965 /* YSResetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSResetPassWordViewController.h; sourceTree = "<group>"; };
 		CCF79CB81D782A2000640965 /* YSResetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSResetPassWordViewController.m; sourceTree = "<group>"; };
 		CCF79CBA1D782B3400640965 /* login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = login.storyboard; sourceTree = "<group>"; };
+		CCFE91AD1D80141F00E12C2B /* YSMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMessageModel.h; sourceTree = "<group>"; };
+		CCFE91AE1D80141F00E12C2B /* YSMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMessageModel.m; sourceTree = "<group>"; };
+		CCFE91B01D80308A00E12C2B /* YSUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSUserInfoModel.h; sourceTree = "<group>"; };
+		CCFE91B11D80308A00E12C2B /* YSUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSUserInfoModel.m; sourceTree = "<group>"; };
+		CCFE91B31D80327600E12C2B /* NSString+QYString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QYString.h"; sourceTree = "<group>"; };
+		CCFE91B41D80327600E12C2B /* NSString+QYString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QYString.m"; sourceTree = "<group>"; };
+		CCFFDDED1D83A28A00F09E96 /* YSCarouselImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCarouselImageView.h; sourceTree = "<group>"; };
+		CCFFDDEE1D83A28A00F09E96 /* YSCarouselImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCarouselImageView.m; sourceTree = "<group>"; };
 		D4E4C20E4F4205211DFEFD82 /* libPods-菜谱.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-菜谱.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -201,8 +256,8 @@
 		CC2326661D66FFC8000EDC4B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				CC2326671D66FFC8000EDC4B /* NSString+QYString.h */,
-				CC2326681D66FFC8000EDC4B /* NSString+QYString.m */,
+				CCFE91B31D80327600E12C2B /* NSString+QYString.h */,
+				CCFE91B41D80327600E12C2B /* NSString+QYString.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -407,8 +462,34 @@
 				CC5DFCF91D76E1020099A3CA /* PrefixHeader.pch */,
 				CC5DFCFA1D76E32D0099A3CA /* YSLocationManager.h */,
 				CC5DFCFB1D76E32D0099A3CA /* YSLocationManager.m */,
+				CC066D2E1D7EC7FE00A23910 /* YSHTTPRequestManager.h */,
+				CC066D2F1D7EC7FE00A23910 /* YSHTTPRequestManager.m */,
+				CC747E0B1D81569200B5B360 /* UIImage+Image.h */,
+				CC747E0C1D81569200B5B360 /* UIImage+Image.m */,
+				CC747E111D8159AD00B5B360 /* UIView+Frame.h */,
+				CC747E121D8159AD00B5B360 /* UIView+Frame.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		CCAB06C51D8551780032FABA /* 原来的地图 */ = {
+			isa = PBXGroup;
+			children = (
+				CCDFBACD1D6DC5C9000A16C9 /* YSDiscoverViewController.h */,
+				CCDFBACE1D6DC5C9000A16C9 /* YSDiscoverViewController.m */,
+				CC2C5B2F1D71313B0040F60B /* YSListDisCoverViewController.h */,
+				CC2C5B301D71313B0040F60B /* YSListDisCoverViewController.m */,
+			);
+			name = "原来的地图";
+			sourceTree = "<group>";
+		};
+		CCAB06C61D8551880032FABA /* 原来的地图标注 */ = {
+			isa = PBXGroup;
+			children = (
+				CC6DC5C21D70802B000778BC /* YSAnnotation.h */,
+				CC6DC5C31D70802B000778BC /* YSAnnotation.m */,
+			);
+			name = "原来的地图标注";
 			sourceTree = "<group>";
 		};
 		CCDFBAB71D6DC5C9000A16C9 /* Classes */ = {
@@ -483,6 +564,8 @@
 			children = (
 				CCDFBAC71D6DC5C9000A16C9 /* YSAddViewController.h */,
 				CCDFBAC81D6DC5C9000A16C9 /* YSAddViewController.m */,
+				CC747E6C1D819D5500B5B360 /* YSSendMessageViewController.h */,
+				CC747E6D1D819D5500B5B360 /* YSSendMessageViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -490,6 +573,8 @@
 		CCDFBAC91D6DC5C9000A16C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC02A4291D82B825007A5126 /* YSMessage.h */,
+				CC02A42A1D82B825007A5126 /* YSMessage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -497,6 +582,13 @@
 		CCDFBACA1D6DC5C9000A16C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC747E641D818C5E00B5B360 /* YSImageclloecView.h */,
+				CC747E651D818C5E00B5B360 /* YSImageclloecView.m */,
+				CC747E6A1D819AB800B5B360 /* Add.storyboard */,
+				CC02A4221D826D00007A5126 /* YSImageCollectionViewCell.xib */,
+				CC02A4241D826D77007A5126 /* YSButtonCollectionCell.xib */,
+				CC02A41F1D82647D007A5126 /* YSImageCollectionViewCell.h */,
+				CC02A4201D82647D007A5126 /* YSImageCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -514,10 +606,13 @@
 		CCDFBACC1D6DC5C9000A16C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CCDFBACD1D6DC5C9000A16C9 /* YSDiscoverViewController.h */,
-				CCDFBACE1D6DC5C9000A16C9 /* YSDiscoverViewController.m */,
-				CC2C5B2F1D71313B0040F60B /* YSListDisCoverViewController.h */,
-				CC2C5B301D71313B0040F60B /* YSListDisCoverViewController.m */,
+				CCAB06B71D843C080032FABA /* YSRecommendViewController.h */,
+				CCAB06B81D843C080032FABA /* YSRecommendViewController.m */,
+				CCAB06C21D854FB70032FABA /* YSRecommentInfoViewController.h */,
+				CCAB06C31D854FB70032FABA /* YSRecommentInfoViewController.m */,
+				CCAB06D71D857C930032FABA /* YSRecommentImageViewController.h */,
+				CCAB06D81D857C930032FABA /* YSRecommentImageViewController.m */,
+				CCAB06C51D8551780032FABA /* 原来的地图 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -525,10 +620,11 @@
 		CCDFBACF1D6DC5C9000A16C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CCEE49F51D7C08BA00C78CE5 /* YSUserInfoModel.h */,
-				CCEE49F61D7C08BA00C78CE5 /* YSUserInfoModel.m */,
-				CC6DC5C21D70802B000778BC /* YSAnnotation.h */,
-				CC6DC5C31D70802B000778BC /* YSAnnotation.m */,
+				CCAB06D11D855D610032FABA /* YSCommentModel.h */,
+				CCAB06D21D855D610032FABA /* YSCommentModel.m */,
+				CCAB06BA1D8526E70032FABA /* YSProductModel.h */,
+				CCAB06BB1D8526E70032FABA /* YSProductModel.m */,
+				CCAB06C61D8551880032FABA /* 原来的地图标注 */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -536,6 +632,12 @@
 		CCDFBAD01D6DC5C9000A16C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CCAB06CC1D8553CC0032FABA /* YSCommentTableViewCell.h */,
+				CCAB06CD1D8553CC0032FABA /* YSCommentTableViewCell.m */,
+				CCAB06CE1D8553CC0032FABA /* YSCommentTableViewCell.xib */,
+				CCAB06BD1D853DB70032FABA /* YSRecommendTableViewCell.h */,
+				CCAB06BE1D853DB70032FABA /* YSRecommendTableViewCell.m */,
+				CCAB06BF1D853DB70032FABA /* YSRecommendTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -564,8 +666,10 @@
 		CCDFBAD51D6DC5C9000A16C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CCDFBB0B1D6DC65E000A16C9 /* YSCommentModel.h */,
-				CCDFBB0C1D6DC65E000A16C9 /* YSCommentModel.m */,
+				CCFE91AD1D80141F00E12C2B /* YSMessageModel.h */,
+				CCFE91AE1D80141F00E12C2B /* YSMessageModel.m */,
+				CCFE91B01D80308A00E12C2B /* YSUserInfoModel.h */,
+				CCFE91B11D80308A00E12C2B /* YSUserInfoModel.m */,
 				CCDFBB0D1D6DC65E000A16C9 /* YSStatusModel.h */,
 				CCDFBB0E1D6DC65E000A16C9 /* YSStatusModel.m */,
 				CCDFBB0F1D6DC65E000A16C9 /* YSUserModel.h */,
@@ -595,7 +699,7 @@
 			children = (
 				CCDFBAD81D6DC5C9000A16C9 /* Controller */,
 				CCDFBADD1D6DC5C9000A16C9 /* Model */,
-				CCDFBAE01D6DC5C9000A16C9 /* View */,
+				CCFFDDEC1D83A27400F09E96 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -618,13 +722,6 @@
 				CCDFBADF1D6DC5C9000A16C9 /* YSHomeListModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		CCDFBAE01D6DC5C9000A16C9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		CCDFBAE11D6DC5C9000A16C9 /* Profile */ = {
@@ -661,6 +758,15 @@
 				CCDFBAE91D6DC5C9000A16C9 /* YSProfileHeader.h */,
 				CCDFBAEA1D6DC5C9000A16C9 /* YSProfileHeader.m */,
 				CCDFBAEB1D6DC5C9000A16C9 /* YSProfileHeader.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CCFFDDEC1D83A27400F09E96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCFFDDED1D83A28A00F09E96 /* YSCarouselImageView.h */,
+				CCFFDDEE1D83A28A00F09E96 /* YSCarouselImageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -728,11 +834,16 @@
 			files = (
 				CC3EB72D1D63F7EF000E775B /* LaunchScreen.storyboard in Resources */,
 				CCDFBAFB1D6DC5C9000A16C9 /* YSProfileHeader.xib in Resources */,
+				CC747E6B1D819AB800B5B360 /* Add.storyboard in Resources */,
 				CCDFBB061D6DC607000A16C9 /* YSCommentCell.xib in Resources */,
 				CCDFBB081D6DC607000A16C9 /* YSFooterView.xib in Resources */,
+				CC02A4251D826D77007A5126 /* YSButtonCollectionCell.xib in Resources */,
+				CCAB06C11D853DB70032FABA /* YSRecommendTableViewCell.xib in Resources */,
 				CC3EB75E1D63F99A000E775B /* Assets.xcassets in Resources */,
 				CC2326811D66FFC8000EDC4B /* arrow@2x.png in Resources */,
 				CCDFBAF11D6DC5C9000A16C9 /* YSEMaileRegisterViewController.xib in Resources */,
+				CCAB06D01D8553CC0032FABA /* YSCommentTableViewCell.xib in Resources */,
+				CC02A4231D826D00007A5126 /* YSImageCollectionViewCell.xib in Resources */,
 				CC3EB7281D63F7EF000E775B /* Main.storyboard in Resources */,
 				CC2C5B2E1D71293B0040F60B /* status.plist in Resources */,
 				CCD03B521D72E95400B47B51 /* registered.storyboard in Resources */,
@@ -798,46 +909,61 @@
 			files = (
 				CC6DC5C41D70802B000778BC /* YSAnnotation.m in Sources */,
 				CC3194DB1D6DDCA70061DF76 /* YSStatusCell.m in Sources */,
-				CC2326801D66FFC8000EDC4B /* NSString+QYString.m in Sources */,
+				CC747E6E1D819D5500B5B360 /* YSSendMessageViewController.m in Sources */,
 				CCDFBAF71D6DC5C9000A16C9 /* YSHomeListModel.m in Sources */,
 				CCDFBB051D6DC607000A16C9 /* YSCommentCell.m in Sources */,
 				CCDFBAFA1D6DC5C9000A16C9 /* YSProfileHeader.m in Sources */,
 				CCF3C2A01D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m in Sources */,
+				CCFE91AF1D80141F00E12C2B /* YSMessageModel.m in Sources */,
 				CCDFBAF81D6DC5C9000A16C9 /* YSProfileInfoViewController.m in Sources */,
 				CCF79CB91D782A2000640965 /* YSResetPassWordViewController.m in Sources */,
 				CCDFBB131D6DC65E000A16C9 /* YSUserModel.m in Sources */,
+				CCAB06C41D854FB70032FABA /* YSRecommentInfoViewController.m in Sources */,
+				CCFFDDEF1D83A28A00F09E96 /* YSCarouselImageView.m in Sources */,
 				CCDFBB071D6DC607000A16C9 /* YSFooterView.m in Sources */,
 				CCDFBB121D6DC65E000A16C9 /* YSStatusModel.m in Sources */,
 				CC2326861D66FFC8000EDC4B /* PINGifRefreshHeader.m in Sources */,
 				CC3EB75D1D63F99A000E775B /* YSNavigationViewController.m in Sources */,
 				CC3EB7591D63F99A000E775B /* AppDelegate.m in Sources */,
+				CC066D301D7EC7FE00A23910 /* YSHTTPRequestManager.m in Sources */,
 				CC3EB7871D64861F000E775B /* YSTabBar.m in Sources */,
+				CCAB06BC1D8526E70032FABA /* YSProductModel.m in Sources */,
 				CCDFBAF21D6DC5C9000A16C9 /* YSAddViewController.m in Sources */,
 				CC5DFCFC1D76E32D0099A3CA /* YSLocationManager.m in Sources */,
 				CC2326851D66FFC8000EDC4B /* PINNormalRefreshFooter.m in Sources */,
 				CC2326871D66FFC8000EDC4B /* PINNormalRefreshHeader.m in Sources */,
 				CC3EB75A1D63F99A000E775B /* YSGuideViewController.m in Sources */,
+				CC747E131D8159AD00B5B360 /* UIView+Frame.m in Sources */,
 				CC2C5B311D71313B0040F60B /* YSListDisCoverViewController.m in Sources */,
 				CC23268A1D66FFC8000EDC4B /* UIView+PINFrame.m in Sources */,
+				CCAB06D91D857C930032FABA /* YSRecommentImageViewController.m in Sources */,
+				CCAB06CF1D8553CC0032FABA /* YSCommentTableViewCell.m in Sources */,
+				CCFE91B21D80308A00E12C2B /* YSUserInfoModel.m in Sources */,
 				CCF3C29D1D75B7D6005EFAA9 /* YSEMaileRegisterViewController.m in Sources */,
+				CCAB06C01D853DB70032FABA /* YSRecommendTableViewCell.m in Sources */,
 				CC2326841D66FFC8000EDC4B /* PINGifRefreshFooter.m in Sources */,
 				CCF3C29F1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m in Sources */,
 				CC3EB75B1D63F99A000E775B /* YSBeiJingScrollView.m in Sources */,
 				CC2326891D66FFC8000EDC4B /* UIScrollView+PINRefresh.m in Sources */,
 				CC3EB71F1D63F7EF000E775B /* main.m in Sources */,
 				CCDFBAF31D6DC5C9000A16C9 /* YSDiscoverViewController.m in Sources */,
-				CCDFBB111D6DC65E000A16C9 /* YSCommentModel.m in Sources */,
+				CCAB06D31D855D610032FABA /* YSCommentModel.m in Sources */,
 				CCDFBAF91D6DC5C9000A16C9 /* YSProfileViewController.m in Sources */,
 				CC75282E1D6EEB570024D105 /* YSInfoDynamicViewController.m in Sources */,
 				CC2326821D66FFC8000EDC4B /* PINBaseRefreshControl.m in Sources */,
+				CC747E661D818C5E00B5B360 /* YSImageclloecView.m in Sources */,
+				CCFE91B51D80327600E12C2B /* NSString+QYString.m in Sources */,
 				CCDFBAF61D6DC5C9000A16C9 /* YSHomeViewController.m in Sources */,
 				CCDFBAF41D6DC5C9000A16C9 /* YSDynamicViewController.m in Sources */,
+				CCAB06B91D843C080032FABA /* YSRecommendViewController.m in Sources */,
 				CC2326831D66FFC8000EDC4B /* PINAutoRefreshFooter.m in Sources */,
 				CCDFBAF51D6DC5C9000A16C9 /* YSHomeInfoViewController.m in Sources */,
 				CCF3C29E1D75B7D6005EFAA9 /* YSLoginViewController.m in Sources */,
 				CC3EB75C1D63F99A000E775B /* MainTabBarViewController.m in Sources */,
-				CCEE49F71D7C08BA00C78CE5 /* YSUserInfoModel.m in Sources */,
+				CC02A4211D82647D007A5126 /* YSImageCollectionViewCell.m in Sources */,
+				CC02A42B1D82B825007A5126 /* YSMessage.m in Sources */,
 				CC2326881D66FFC8000EDC4B /* UIScrollView+PINExtension.m in Sources */,
+				CC747E0D1D81569200B5B360 /* UIImage+Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

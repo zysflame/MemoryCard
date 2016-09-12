@@ -24,4 +24,6 @@
 /** 开启定位服务*/
 - (void)startTheLocationService;
 
+
+- (void)stopTheLocationService;
 @end

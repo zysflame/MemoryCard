@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class YSStatusModel;
+@class YSMessageModel;
 
 @interface YSStatusCell : UITableViewCell
 
+@property (nonatomic, strong) YSMessageModel *messageModel;
 @property (nonatomic, strong) YSStatusModel *status;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;

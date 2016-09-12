@@ -15,7 +15,12 @@
 #import "YSDiscoverViewController.h"
 #import "YSProfileViewController.h"
 
+#import "YSRecommendViewController.h"
+
+
 #import "YSTabBar.h"
+
+#import "UIImage+Image.h"
 
 @interface MainTabBarViewController ()
 
@@ -33,21 +38,30 @@
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
-//    self.view.backgroundColor = YSColorRandom;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.tabBar.translucent = NO;
     
     [self loadTabBarController];
 }
 
+#pragma mark  > 添加tabar 的子控制器 <
 - (void)loadTabBarController{
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"tabbar_bg"];
+    [imageView setContentMode:UIViewContentModeCenter];
+    imageView.frame = CGRectMake(0, -8, self.tabBar.width, self.tabBar.height);
+    [self.tabBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+    [self.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]];
+    
     YSHomeViewController *HomeVC = [YSHomeViewController new];
     [self addViewController:HomeVC WithImageName:@"tabbar_hote" Title:@"热门"];
     
     YSDynamicViewController *dynamicVC = [YSDynamicViewController new];
     [self addViewController:dynamicVC WithImageName:@"tabbar_menu" Title:@"个人动态"];
-
-    YSDiscoverViewController *discoverVC = [YSDiscoverViewController new];
-    [self addViewController:discoverVC WithImageName:@"tabar_discover" Title:@"附近的人"];
+    
+    YSRecommendViewController *discoverVC = [YSRecommendViewController new];
+    [self addViewController:discoverVC WithImageName:@"tabar_discover" Title:@"附近的推荐"];
     [UIImage imageNamed:@"tabbar_menu"];
     
     YSProfileViewController *profileVC = [YSProfileViewController new];
@@ -61,10 +75,13 @@
      __weak typeof(self) weakSelf = self;
     [tabBar setBlkTapThePlusBtn:^(UIButton *button) {
         // 点击加号按钮触发的事件
-        YSAddViewController *addVC = [YSAddViewController new];
+        
+        UIStoryboard *addSB = [UIStoryboard storyboardWithName:@"Add" bundle:[NSBundle mainBundle]];
+        UIViewController *addVC = [addSB instantiateViewControllerWithIdentifier:@"YSSendMessageViewController"];
+        
+//        YSAddViewController *addVC = [YSAddViewController new];
         YSNavigationViewController *naviVC = [[YSNavigationViewController alloc] initWithRootViewController:addVC];
         [weakSelf presentViewController:naviVC animated:YES completion:nil];
-//        NSLog(@"点击了加号按钮");
     }];
     [self setValue:tabBar forKey:@"tabBar"];
 }

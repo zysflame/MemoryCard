@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class YSCurrentMessage;
 @interface YSInfoDynamicViewController : UIViewController
+
+@property (nonatomic, strong) YSCurrentMessage *currentMessage;
 
 @end

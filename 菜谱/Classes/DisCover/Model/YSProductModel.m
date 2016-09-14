@@ -15,6 +15,7 @@
     model.img = dicData[@"img"];
     model.title = dicData[@"title"];
     model.comment = dicData[@"comment"];
+    model.distance = dicData[@"newDist"];
     model.address = dicData[@"address"];
     model.strID = dicData[@"id"];
     model.iosPoint = dicData[@"iosPoint"];

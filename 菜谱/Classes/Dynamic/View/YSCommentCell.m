@@ -7,7 +7,7 @@
 //
 
 #import "YSCommentCell.h"
-#import "YSCommentModel.h"
+#import "YSCommentRequestModel.h"
 #import "YSUserModel.h"
 #import "UIImageView+WebCache.h"
 

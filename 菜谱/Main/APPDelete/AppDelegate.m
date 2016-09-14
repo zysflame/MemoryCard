@@ -11,10 +11,13 @@
 #import "YSGuideViewController.h"
 #import "YSNavigationViewController.h"
 #import "YSLoginViewController.h"
-
+// 信息
+#import "YSCurrentMessage.h"
+// 百度地图
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 
-#import "YSMessage.h"
+#define KAppKey @""
+
 @interface AppDelegate () <BMKGeneralDelegate>
 
 /** 创建的一个百度地图的管理*/
@@ -40,8 +43,10 @@
     
     // 如果使用美国站点，请加上下面这行代码：
     // [AVOSCloud setServiceRegion:AVServiceRegionUS];
-    [YSMessage registerSubclass];
     [AVOSCloud setApplicationId:@"6WuwHq3DabgyOgPq2V1H5yON-gzGzoHsz" clientKey:@"AwRSis2jueemKU9EbdFoXHVp"];
+    
+    // 在LeanCould 中注册子类化的对象
+    [YSCurrentMessage registerSubclass];
     
     // 初始化百度地图的管理器
     self.bManager = [[BMKMapManager alloc] init];

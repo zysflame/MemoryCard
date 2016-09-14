@@ -40,6 +40,10 @@
 - (void)loadDefaultSetting{
     self.title = @"资料设置";
     self.headerBtn.layer.masksToBounds = YES;
+    [self loadInformationSetting];
+}
+
+- (void)loadInformationSetting{
     AVUser *currentUser = [AVUser currentUser];
     self.lblUserName.text = currentUser.username;
     
@@ -51,12 +55,11 @@
     self.txfAge.text = [defau objectForKey:@"age"];
     NSInteger genderIndex = [[defau objectForKey:@"gender"] integerValue];
     self.gender.selectedSegmentIndex = genderIndex;
-
     
     AVQuery *userQuery = [AVQuery queryWithClassName:@"_User"];
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [userQuery getObjectInBackgroundWithId:currentUser.objectId block:^(AVObject *object, NSError *error) {
-//        NSLog(@"当前用户的昵称是>>>%@",object[@"headerImage"]);
+        //        NSLog(@"当前用户的昵称是>>>%@",object[@"headerImage"]);
         NSData *imageData = object[@"headerImage"];
         UIImage *image = [UIImage imageWithData:imageData scale:1.0];
         [weakSelf.headerBtn setImage:image forState:UIControlStateNormal];
@@ -65,6 +68,7 @@
         NSInteger genderIndex = [object[@"gender"] integerValue];
         weakSelf.gender.selectedSegmentIndex = genderIndex;
     }];
+
 }
 
 #pragma mark  > 数组的懒加载 <
@@ -140,8 +144,9 @@
     TZImagePickerController *imagepicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
      __weak typeof(self) weakSelf = self;
     [imagepicker setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assest, BOOL isCan) {
-        weakSelf.headerImage = photos[0];
-        [button setBackgroundImage:photos[0] forState:UIControlStateNormal];
+         weakSelf.headerImage = photos[0];
+        [button setImage:photos[0] forState:UIControlStateNormal];
+    
     }];
     [self presentViewController:imagepicker animated:YES completion:nil];
 }

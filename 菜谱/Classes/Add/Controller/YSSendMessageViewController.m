@@ -4,19 +4,20 @@
 //
 //  Created by qingyun on 16/9/8.
 //  Copyright © 2016年 qingyun. All rights reserved.
-//
+//   发表自己的心情
 
 #import "YSSendMessageViewController.h"
 
 #import "TZImagePickerController.h"
 #import "YSImageCollectionViewCell.h"
 
-#import "YSMessage.h"
-
+#import "YSMessageModel.h"
+#import "YSCurrentMessage.h"
 
 static NSString * const strId = @"Image";
 //static NSUInteger const maxNumImage = 9;
-#define maxNumImage 3
+// 设置选择图片的最大数
+#define maxNumImage 9
 
 @interface YSSendMessageViewController () <UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TZImagePickerControllerDelegate>
 
@@ -46,45 +47,12 @@ static NSString * const strId = @"Image";
     [self loadNavigationSetting];
     [self loadDefaultSetting];
     [self loadTheCollectionSetting];
-    [self text];
-}
-
-- (void)text{
-    AVQuery *query = [AVQuery queryWithClassName:@"YSMessage"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"查询失败>>> %@",error);
-        }
-        NSArray<YSMessage *> *messageData = objects;
-        
-        [YSMessage fetchAllInBackground:messageData block:^(NSArray *objects, NSError *error) {
-            if (error) {
-                NSLog(@"查询失败>>> %@",error);
-
-            }
-            for (YSMessage *message in objects) {
-                NSLog(@">>>%@",[message objectForKey:@"content"]);
-                NSData *imageData = [message objectForKey:@""];
-                UIImage *image = [UIImage  imageWithData:imageData];
-                NSLog(@">>>>%@",image);
-//                [self.arrMImages addObject:image];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
-//                NSLog(@"objectId>>>%@",image);
-            }
-        }];
-        
-
-    }];
-
 }
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
     // 初始化存放图片的数组
     self.arrMImages = [NSMutableArray arrayWithCapacity:9];
-    
     self.textViewBack.text = nil;
     self.textViewBack.delegate = self;
 }
@@ -145,6 +113,7 @@ static NSString * const strId = @"Image";
         }
     }
 }
+
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -174,7 +143,7 @@ static NSString * const strId = @"Image";
         TZImagePickerController *imagepickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:maxNumImage delegate:self];
         __weak typeof(self) weakSelf = self;
         [imagepickerVC setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isCan) {
-            NSLog(@">>>>%@",photos);
+//            NSLog(@">>>>%@",photos);
             [weakSelf.arrMImages addObjectsFromArray:photos];
             if (weakSelf.arrMImages.count >= maxNumImage) {
                 NSRange range = NSMakeRange(maxNumImage, weakSelf.arrMImages.count - maxNumImage);
@@ -212,19 +181,23 @@ static NSString * const strId = @"Image";
         NSData *imageData = UIImageJPEGRepresentation(self.arrMImages[index], 1);
         [arrMImageDatas addObject:imageData];
     }
-    YSMessage *message = [YSMessage object];// 构建对象
-//    [message setObject:self.textViewBack.text forKey:@"content"];
-//    message.arrImageData = arrMImageDatas;
-    [message setObject:arrMImageDatas forKey:@"arrImageData"];
-//    [message saveInBackground];// 保存到云端
+    
+    AVUser *currentUser = [AVUser currentUser];
+    
+    YSCurrentMessage *message = [YSCurrentMessage object];
+    message.userName = currentUser.username;
+    message.nickName = [currentUser objectForKey:@"nickName"];
+    message.headerImv = [currentUser objectForKey:@"headerImage"];
+    
+    message.content = self.textViewBack.text;
+    message.arrImages = [arrMImageDatas copy];
+    
     [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"保存成功");
-        }else{
-            NSLog(@"失败>>> %@",error);
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
     
 }
 

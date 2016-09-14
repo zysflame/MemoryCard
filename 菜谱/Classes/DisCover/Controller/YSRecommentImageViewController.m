@@ -32,7 +32,7 @@ static NSString * const reuseIdentifier = @"image";
 
 #pragma mark 加载导航栏设置
 - (void)loadNavigationSetting{
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.automaticallyAdjustsScrollViewInsets = YES;
 }
 
 #pragma mark 加载默认设置
@@ -47,18 +47,18 @@ static NSString * const reuseIdentifier = @"image";
     // 创建一个初始化UICollectionView的layout对象
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     // 设置最小的行距
-    flowLayout.minimumLineSpacing = 20;
+    flowLayout.minimumLineSpacing = 10;
     // 设置最小的列间距
-    flowLayout.minimumInteritemSpacing = 20;
+    flowLayout.minimumInteritemSpacing = 10;
     // 设置每个cell的尺寸
     CGFloat jiange = 10;
-    CGFloat width = (YSScreenWidth - jiange) / 3;
-    flowLayout.itemSize = CGSizeMake(width, 100);
+    CGFloat width = (YSScreenWidth - 3 * jiange) / 2;
+    flowLayout.itemSize = CGSizeMake(width, width);
     // 设置section的边距
-    flowLayout.sectionInset = UIEdgeInsetsMake(30, 30, 30, 30);
+    flowLayout.sectionInset = UIEdgeInsetsMake(jiange, jiange, jiange, jiange);
     // 设置header 的高度, 和我们的TableView的header一样(CollectionView有一个滚动方向, 当垂直滚动的时候, 高度起作用, 当水平滚动的时候, 宽度起作用)
-    flowLayout.headerReferenceSize = CGSizeMake(80, 44);
-    flowLayout.footerReferenceSize = CGSizeMake(44, 80);
+    flowLayout.headerReferenceSize = CGSizeMake(0, 0);
+    flowLayout.footerReferenceSize = CGSizeMake(0, 0);
     
     // 滚动的方向
     //flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -72,7 +72,7 @@ static NSString * const reuseIdentifier = @"image";
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     // UICollectionView默认的背景色是黑色
-    collectionView.backgroundColor = [UIColor orangeColor];
+    collectionView.backgroundColor = [UIColor whiteColor];
     
     // 设置数据源
     collectionView.dataSource = self;
@@ -101,7 +101,7 @@ static NSString * const reuseIdentifier = @"image";
         UIImageView *cellImageView = [UIImageView new];
         NSString *strImage = [self.arrData objectAtIndex:indexPath.item];
         NSURL *imageUrl = [NSURL URLWithString:strImage];
-        [cellImageView sd_setImageWithURL:imageUrl];
+        [cellImageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"social-placeholder"]];
         cell.backgroundView = cellImageView;
     }
     // Configure the cell

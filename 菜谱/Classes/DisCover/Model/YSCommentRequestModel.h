@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface YSCommentModel : NSObject
+@interface YSCommentRequestModel : NSObject
 
 /** travelId */
 @property (nonatomic,copy) NSString *travelId;
@@ -22,7 +22,7 @@
 @property (nonatomic,copy) NSString *useComment;
 
 /** 创建模型*/
-+ (instancetype)commentModelWithDictionary:(NSDictionary *)dicData;
++ (instancetype)commentRequestModelWithDictionary:(NSDictionary *)dicData;
 
 
 @end

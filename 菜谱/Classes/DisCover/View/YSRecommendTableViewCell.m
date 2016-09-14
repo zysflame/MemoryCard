@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblComment;
 /** 地址*/
 @property (weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property (weak, nonatomic) IBOutlet UILabel *lblDistance;
 
 @end
 
@@ -38,8 +39,9 @@
     NSURL *imvURL = [NSURL URLWithString:_productModel.img];
     [self.imvHeader sd_setImageWithURL:imvURL];
     self.lblTitle.text = _productModel.title;
-    self.lblComment.text = _productModel.comment;
+    self.lblComment.text = [NSString stringWithFormat:@"%@条评论",_productModel.comment];
     self.lblAddress.text = _productModel.address;
+    self.lblDistance.text = _productModel.distance;
 }
 
 

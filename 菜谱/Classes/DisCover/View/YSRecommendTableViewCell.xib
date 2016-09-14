@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekS-AX-4NY">
-                        <rect key="frame" x="116" y="47.5" width="51" height="21"/>
+                        <rect key="frame" x="116" y="47" width="51" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -55,20 +55,27 @@
                             </mask>
                         </variation>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGb-DH-r6d">
+                        <rect key="frame" x="166" y="97.5" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kfB-Xg-VcR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="5Ho-wh-eN4"/>
                     <constraint firstItem="Crh-au-WEA" firstAttribute="top" secondItem="kfB-Xg-VcR" secondAttribute="top" id="8xy-e5-xC1"/>
                     <constraint firstItem="6YQ-nv-EPX" firstAttribute="leading" secondItem="ekS-AX-4NY" secondAttribute="leading" id="CYL-mV-hzm"/>
+                    <constraint firstItem="gGb-DH-r6d" firstAttribute="centerY" secondItem="6YQ-nv-EPX" secondAttribute="centerY" id="Djh-Ap-yOR"/>
                     <constraint firstItem="Crh-au-WEA" firstAttribute="leading" secondItem="kfB-Xg-VcR" secondAttribute="trailing" constant="8" id="JKt-X0-wKv"/>
                     <constraint firstAttribute="bottom" secondItem="kfB-Xg-VcR" secondAttribute="bottom" constant="8" id="Q1s-Eb-XUR"/>
                     <constraint firstItem="ekS-AX-4NY" firstAttribute="centerY" secondItem="kfB-Xg-VcR" secondAttribute="centerY" id="U3K-Lc-eyP"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ekS-AX-4NY" secondAttribute="trailing" constant="8" id="Vk6-aA-7lP"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Crh-au-WEA" secondAttribute="trailing" constant="8" id="X55-br-qPK"/>
                     <constraint firstItem="kfB-Xg-VcR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="dYH-mn-Geh"/>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="6YQ-nv-EPX" secondAttribute="trailing" constant="8" id="iAc-F9-TTj"/>
                     <constraint firstItem="6YQ-nv-EPX" firstAttribute="bottom" secondItem="kfB-Xg-VcR" secondAttribute="bottom" id="lhx-nb-DOp"/>
                     <constraint firstItem="ekS-AX-4NY" firstAttribute="leading" secondItem="Crh-au-WEA" secondAttribute="leading" id="ynz-Oi-T5S"/>
+                    <constraint firstItem="gGb-DH-r6d" firstAttribute="leading" secondItem="6YQ-nv-EPX" secondAttribute="trailing" constant="16" id="yzn-P5-DJq"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -80,9 +87,10 @@
                 <outlet property="imvHeader" destination="kfB-Xg-VcR" id="OXi-8g-4eh"/>
                 <outlet property="lblAddress" destination="6YQ-nv-EPX" id="LGM-fA-27A"/>
                 <outlet property="lblComment" destination="ekS-AX-4NY" id="jPW-33-LHC"/>
+                <outlet property="lblDistance" destination="gGb-DH-r6d" id="rM3-bk-12T"/>
                 <outlet property="lblTitle" destination="Crh-au-WEA" id="cxx-0J-feI"/>
             </connections>
-            <point key="canvasLocation" x="243" y="361.5"/>
+            <point key="canvasLocation" x="242.5" y="361.5"/>
         </tableViewCell>
     </objects>
 </document>

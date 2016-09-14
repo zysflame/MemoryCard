@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class YSStatusModel;
-@class YSMessageModel;
-@class YSCurrentMessage;
-@interface YSStatusCell : UITableViewCell
+@class YSCommentInfoModel;
 
-@property (nonatomic, strong) YSCurrentMessage *message;
+@interface YSCommentInfoCell : UITableViewCell
 
-@property (nonatomic, strong) YSStatusModel *status;
+@property (nonatomic, strong) YSCommentInfoModel *commentModel;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

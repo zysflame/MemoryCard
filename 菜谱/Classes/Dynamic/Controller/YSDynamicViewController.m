@@ -14,7 +14,7 @@
 #import "YSFooterView.h"
 
 #import "YSMessageModel.h"
-
+#import "YSCurrentMessage.h"
 @interface YSDynamicViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -26,82 +26,66 @@
 @implementation YSDynamicViewController
 
 
-//- (NSArray *)arrDataModels{
-//    if (!_arrDataModels) {
-//        NSString *strFilePath=[[NSBundle mainBundle] pathForResource:@"status" ofType:@"plist"];
-//        NSDictionary *dicStatuses=[NSDictionary dictionaryWithContentsOfFile:strFilePath];
-//        NSArray *arrStatuses=dicStatuses[@"statuses"];
-//        NSMutableArray *arrMStatusModels=[NSMutableArray arrayWithCapacity:arrStatuses.count];
-//        for (NSDictionary *dicData in arrStatuses) {
-//            YSStatusModel *status = [YSStatusModel statusModelWithDictionary:dicData];
-//            [arrMStatusModels addObject:status];
-//        }
-//        _arrDataModels = [arrMStatusModels copy];
-//
-//    }
-//    return _arrDataModels;
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadDefaultSetting];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-//    [self text];
+    [self requestTheData];
 }
 
-- (void)text{
-//    [[AVUser currentUser] setObject:nil forKey:@"MessageData"];
-    NSArray *arr = [[AVUser currentUser] objectForKey:@"MessageData"];
-    NSLog(@">>>>>%@",arr);
-    NSUInteger count = arr.count;
-    if (count == 0) {
-        UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"信息为0...." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+- (void)requestTheData{
+    AVQuery *query = [AVQuery queryWithClassName:@"YSCurrentMessage"];
+     __weak typeof(self) weakSelf = self;
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+//            NSLog(@"查询失败>>> %@",error);
+            UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"网络不好，请耐心等待" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            }];
+            UIAlertAction *alertDengLuAction = [UIAlertAction actionWithTitle:@"刷新试试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakSelf requestTheData];
+            }];
+            [alertContorller addAction:alertDengLuAction];
+            [alertContorller addAction:alertAction];
+            [self presentViewController:alertContorller animated:YES completion:nil];
+        }
+        NSArray<YSCurrentMessage *> *messageData = objects;
+        weakSelf.arrDataModels = [NSMutableArray arrayWithCapacity:messageData.count];
+        for (YSCurrentMessage *message in messageData) {
             
-        }];
-        [alertContorller addAction:alertAction];
-        [self presentViewController:alertContorller animated:YES completion:nil];
-        return ;
-    }
-//    NSMutableArray *arrMDatas = [NSMutableArray arrayWithCapacity:count];
-    self.arrDataModels = [NSMutableArray arrayWithCapacity:count];
-    for (NSUInteger index = 0; index < count; index ++) {
-        NSString *str = arr[index];
-        AVQuery *query = [AVQuery queryWithClassName:@"Message"];
-        
-        [query getObjectInBackgroundWithId:str block:^(AVObject *object, NSError *error) {
-            if (object) {
-                YSMessageModel *model = [YSMessageModel messageModelWithDictionary:(NSDictionary *)object];
-                [self.arrDataModels addObject:model];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self.tableView reloadData];
-                });
-                
-            }
-        }];
-    }
+//            NSLog(@"请求成功的对象>>%ld",message.arrImages.count);
+            [weakSelf.arrDataModels addObject:message];
+        }
+        // 刷新 UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
+    }];
+    
 }
 
-#pragma mark 加载默认设置
-- (void)loadDefaultSetting{
-    self.view.backgroundColor = [UIColor greenColor];
-    
-    self.automaticallyAdjustsScrollViewInsets = YES;
+#pragma mark  > 加载 tableView 的设置 <
+- (void)loadTableViewSetting{
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
     tableView.dataSource = self;
     tableView.delegate = self;
     self.tableView = tableView;
-    tableView.sectionFooterHeight = 30;
     tableView.estimatedRowHeight = 40;
+}
+
+#pragma mark 加载默认设置
+- (void)loadDefaultSetting{
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    [self loadTableViewSetting];
 }
 
 #pragma mark  > UITableViewDataSource -- UITableViewDelegate<
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"<<<<>>>%ld",self.arrDataModels.count);
     return self.arrDataModels.count;
 }
 
@@ -110,30 +94,24 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    YSStatusCell *statusCell = [YSStatusCell cellWithTableView:tableView];
-//    YSStatusModel *status = self.arrDataModels[indexPath.section];
-    YSMessageModel *model = self.arrDataModels[indexPath.section];
-//    NSLog(@"model>>%@",model.content);
-    statusCell.messageModel = model;
-//    statusCell.status = status;
-    return statusCell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    YSFooterView *footer = [YSFooterView footerViewWithTableView:tableView];
-    footer.contentView.backgroundColor = [UIColor whiteColor];
-//    footer.status = self.arrDataModels[section];
-    return footer;
+    YSStatusCell *messageCell = [YSStatusCell cellWithTableView:tableView];
+    YSCurrentMessage *msg = self.arrDataModels[indexPath.section];
+    messageCell.message = msg;
+    return messageCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // 取消IndexPath位置cell的选中状态
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-     YSInfoDynamicViewController *homeInfoVC = [YSInfoDynamicViewController new];
-    [self.navigationController pushViewController:homeInfoVC animated:YES];
+    YSCurrentMessage *msg = self.arrDataModels[indexPath.section];
+    YSInfoDynamicViewController *InfoDynamicVC = [YSInfoDynamicViewController new];
+    InfoDynamicVC.currentMessage = msg;
+    [self.navigationController pushViewController:InfoDynamicVC animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {

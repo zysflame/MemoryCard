@@ -6,12 +6,12 @@
 //  Copyright © 2016年 qingyun. All rights reserved.
 //
 
-#import "YSCommentModel.h"
+#import "YSCommentRequestModel.h"
 
-@implementation YSCommentModel
+@implementation YSCommentRequestModel
 
-+ (instancetype)commentModelWithDictionary:(NSDictionary *)dicData{
-    YSCommentModel *model = [YSCommentModel new];
++ (instancetype)commentRequestModelWithDictionary:(NSDictionary *)dicData{
+    YSCommentRequestModel *model = [YSCommentRequestModel new];
     model.travelId = dicData[@"travelId"];
     model.ticketId = dicData[@"ticketId"];
     model.sightName = dicData[@"sightName"];

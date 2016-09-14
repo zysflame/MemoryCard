@@ -21,7 +21,7 @@
     //NSDate *datePunlish = [NSDate dateWithTimeIntervalSinceNow:-100];
     
     // 3, 计算两个时间的时间差
-    NSTimeInterval interval =[dateNow timeIntervalSinceDate:datePunlish];
+    NSTimeInterval interval = [dateNow timeIntervalSinceDate:datePunlish];
     
     // 4, 根据时间差的结果进行分类, 刚刚(1分钟内), 几分钟前, 几个小时之前, 几天前.....
 //    NSLog(@"---------%f", interval);

@@ -9,8 +9,14 @@
 #import "YSInfoDynamicViewController.h"
 
 #import "YSCommentCell.h"
+#import "YSStatusCell.h"
 
-@interface YSInfoDynamicViewController ()
+
+@interface YSInfoDynamicViewController () <UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, weak) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray *arrDataModels;
 
 @end
 
@@ -19,13 +25,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadDefaultSetting];
+    [self loadNavigationSetting];
 }
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
     self.view.backgroundColor = YSColorRandom;
+    
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    [self.view addSubview:tableView];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    self.tableView = tableView;
+    //    tableView.sectionFooterHeight = 30;
+    tableView.estimatedRowHeight = 40;
 }
 
+#pragma mark 加载导航栏设置
+- (void)loadNavigationSetting{
+    self.title = @"介绍";
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    YSStatusCell *messageCell = [YSStatusCell cellWithTableView:tableView];
+    YSCurrentMessage *msg = self.currentMessage;
+    messageCell.message = msg;
+    return messageCell;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

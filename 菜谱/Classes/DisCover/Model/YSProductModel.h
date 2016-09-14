@@ -18,12 +18,12 @@
 @property (nonatomic,copy) NSString *comment;
 /** address  地址*/
 @property (nonatomic,copy) NSString *address;
+/** newDist 距离*/
+@property (nonatomic,copy) NSString *distance;
 /** id  详情请求用的id*/
 @property (nonatomic,copy) NSString *strID;
 /** iosPoint 地址*/
 @property (nonatomic,copy) NSString *iosPoint;
-
-
 
 
 /** 创建模型*/

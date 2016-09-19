@@ -20,7 +20,7 @@
 /** tableView */
 @property (nonatomic, weak) UITableView *tableView;
 /** 数据源*/
-@property (nonatomic, strong) NSArray *arrData;
+@property (nonatomic, strong) NSMutableArray *arrData;
 /** 表头的图片*/
 @property (nonatomic, weak) UIImageView *headerIMV;
 /** 图片的数量*/
@@ -28,7 +28,7 @@
 /** 标题*/
 @property (nonatomic,copy) NSString *strSightName;
 
-
+@property (nonatomic, assign) NSUInteger pageNum;
 @end
 
 @implementation YSRecommentInfoViewController
@@ -54,7 +54,9 @@
     tableView.sectionFooterHeight = 30;
     tableView.estimatedRowHeight = 40;
     // 初始化数组
-    self.arrData = [NSArray array];
+    self.arrData = [NSMutableArray array];
+    self.pageNum = 1;
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
     
     UIImageView *headerImv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
     self.headerIMV = headerImv;
@@ -80,18 +82,22 @@
     __weak typeof(self) weakSelf = self;
     // 设置自动切换透明度(在导航栏下面自动隐藏)
     tableView.mj_header.automaticallyChangeAlpha = YES;
-    
     //默认block方法：设置下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        NSLog(@"下拉刷新");
+        //        NSLog(@"下拉刷新");
         [weakSelf requestTheInformation];
     }];
     
     //默认block方法：设置上拉加载更多
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         //Call this Block When enter the refresh status automatically
-        [weakSelf requestTheInformation];
+        [weakSelf getTheMoreNewData]; // 更新请求的数据    页数什么的
     }];
+}
+
+- (void)getTheMoreNewData{
+    self.pageNum += 1;
+    [self requestTheInformation];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -128,15 +134,15 @@
     YSHTTPRequestManager *manager = [YSHTTPRequestManager sharedHTTPRequest];
     __weak typeof(self) weakSelf = self;
     [manager GETWithURL:strURL withParam:dic andRequestSuccess:^(id responseObject) {
-       
-        NSLog(@">>>>数据是%@",responseObject);
+        
+        //        NSLog(@">>>>数据是%@",responseObject);
         NSDictionary *basic = responseObject[@"basic"];
         NSString *strImageUrl = basic[@"image"];
         NSURL *imageURL = [NSURL URLWithString:strImageUrl];
         
         NSArray *arrImage = basic[@"images"];
         NSString *strImvCount = [NSString stringWithFormat:@"%ld 张美图",arrImage.count];
-    
+        
         YSCommentRequestModel *model = [YSCommentRequestModel commentRequestModelWithDictionary:basic[@"comment"]];
         weakSelf.title = model.sightName;
         weakSelf.strSightName = model.sightName;
@@ -148,8 +154,7 @@
             weakSelf.lblImvCount.text = strImvCount;
             // 结束刷新
             [weakSelf.tableView reloadData];
-            [weakSelf.tableView.mj_header endRefreshing];
-
+            
         });
     } andRequestFailure:^(NSError *error) {
         __weak typeof(self) weakSelf = self;
@@ -169,25 +174,27 @@
 
 #pragma mark  > 请求评论的内容 <
 - (void)requestTheCommentWithModel:(YSCommentRequestModel *)Model{
+    
     NSString *strURL = @"http://searchtouch.qunar.com/queryData/searchCommentList.do";
-    NSDictionary *dic = @{@"ticketId":Model.ticketId,@"useComment":Model.useComment,@"travelId":Model.travelId};
+    NSDictionary *dic = @{@"ticketId":Model.ticketId,@"useComment":Model.useComment,@"travelId":Model.travelId,@"sightName":Model.sightName,@"sightId":Model.sightId,@"pageNum":@(self.pageNum),@"pageSize":@"8"};
+    //    NSLog(@">>>>page%ld",self.pageNum);
     YSHTTPRequestManager *manager = [YSHTTPRequestManager sharedHTTPRequest];
     __weak typeof(self) weakSelf = self;
     [manager GETWithURL:strURL withParam:dic andRequestSuccess:^(id responseObject) {
-//        NSLog(@">>>>数据是%@",responseObject);
+        //        NSLog(@">>>>数据是%@",responseObject);
         NSDictionary *dicData = responseObject[@"data"];
         NSArray *arr = dicData[@"list"];
         NSUInteger count = arr.count;
-        NSMutableArray *arrMData = [NSMutableArray arrayWithCapacity:count];
         for (NSUInteger index = 0; index < count; index ++) {
             NSDictionary *dic = arr[index];
             YSCommentInfoModel *infoModel = [YSCommentInfoModel modelWithDictionary:dic];
-            [arrMData addObject:infoModel];
+            [weakSelf.arrData addObject:infoModel];
         }
-        weakSelf.arrData = [arrMData copy];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
         });
     } andRequestFailure:^(NSError *error) {
         __weak typeof(self) weakSelf = self;
@@ -218,13 +225,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

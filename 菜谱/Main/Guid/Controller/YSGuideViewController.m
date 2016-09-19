@@ -31,10 +31,10 @@
 
 - (NSArray *)arrBackImages{
     if (!_arrBackImages) {
-        NSUInteger count = 6;
+        NSUInteger count = 5;
         NSMutableArray *arrMImages = [NSMutableArray arrayWithCapacity:count];
         for (NSUInteger index = 0; index < count; index ++) {
-            NSString *strName = [NSString stringWithFormat:@"beiJing_%lu",(unsigned long)index];
+            NSString *strName = [NSString stringWithFormat:@"足迹_%lu",(unsigned long)index];
             [arrMImages addObject:strName];
         }
         _arrBackImages = [arrMImages copy];
@@ -131,7 +131,6 @@
                 make.top.and.bottom.equalTo(scrollViewback);
                 make.leading.equalTo(imageViewBefore.mas_trailing);
                 make.width.equalTo(imageViewBefore);
-                //                make.height.equalTo(scrollView);
                 make.centerY.equalTo(scrollViewback);
             }];
         }
@@ -144,17 +143,17 @@
     
     UIButton *btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnNext addTarget:self action:@selector(clickTheBtnNext) forControlEvents:UIControlEventTouchUpInside];
-    [btnNext setTitle:@"请登录账号" forState:UIControlStateNormal];
+    [btnNext setTitle:@"欢迎使用" forState:UIControlStateNormal];
     btnNext.titleLabel.font = [UIFont italicSystemFontOfSize:30];
     [btnNext setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.scrollViewback addSubview:btnNext];
     
     CGFloat btnWidth = 100;
-   
+    
     [btnNext mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(150));
-        make.leading.equalTo(imageView).offset((YSScreenWidth - btnWidth) / 2);
-//        make.centerY.equalTo(imageView);
+        make.leading.equalTo(imageView).offset((YSScreenWidth - btnWidth) / 2 + 30);
+        //        make.centerY.equalTo(imageView);
         make.bottom.equalTo(imageView).offset(-100);
         make.height.mas_equalTo(60);
     }];
@@ -163,7 +162,7 @@
     [btnNext.layer setCornerRadius:5.0]; // 设置边框圆角
     [btnNext.layer setBorderColor:[UIColor orangeColor].CGColor];  // 设置边框
     [btnNext.layer setBorderWidth:1.0];   // 设置边框的线宽
-    [btnNext.layer setMasksToBounds:YES]; // 
+    [btnNext.layer setMasksToBounds:YES]; //
 }
 
 - (void)didReceiveMemoryWarning {

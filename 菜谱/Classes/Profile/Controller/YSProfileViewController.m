@@ -30,7 +30,7 @@
 
 - (NSArray *)arrTitles{
     if (!_arrTitles) {
-        _arrTitles = @[@"资料设置",@"清除缓存",@"功能介绍",@"帮助",@"切换账号",@"退出程序"];
+        _arrTitles = @[@"资料设置",@"密码重置",@"功能介绍",@"帮助",@"切换账号",@"退出程序"];
     }
     return _arrTitles;
 }
@@ -42,21 +42,21 @@
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
-//    self.view.backgroundColor = YSColorRandom;
-//    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(80, 100, 200, 200)];
-//    [self.view addSubview:lable];
-//    lable.numberOfLines = 0;
-//    lable.text = @"包含资料设置，好友的关注列表，自己发的自己的足迹";
+    //    self.view.backgroundColor = YSColorRandom;
+    //    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(80, 100, 200, 200)];
+    //    [self.view addSubview:lable];
+    //    lable.numberOfLines = 0;
+    //    lable.text = @"包含资料设置，好友的关注列表，自己发的自己的足迹";
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-//    tableView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0);
+    //    tableView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0);
     [self.view addSubview:tableView];
     tableView.dataSource = self;
     tableView.delegate = self;
     self.tableView = tableView;
     
     YSProfileHeader *infoView = [YSProfileHeader profileHeaderView];
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     AVUser *currentUser = [AVUser currentUser];
     infoView.txfUserName.text = currentUser.username;
     
@@ -81,7 +81,7 @@
             [infoView.headerBtn setBackgroundImage:[UIImage imageNamed:@"social-placeholder"] forState:UIControlStateNormal];
         }
     }];
-
+    
     [infoView setBlkClickTheHeaderBtn:^(UIButton *button) {
         weakSelf.headerBtn = button;
         TZImagePickerController *imagepicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
@@ -90,11 +90,11 @@
         }];
         [weakSelf presentViewController:imagepicker animated:YES completion:nil];
         
-//        UIImagePickerController *pickerVC = [[UIImagePickerController alloc] init];
-//        pickerVC.delegate = (id)self;
-//        pickerVC.allowsEditing = NO;
-//        pickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        [weakSelf presentViewController:pickerVC animated:YES completion:nil];
+        //        UIImagePickerController *pickerVC = [[UIImagePickerController alloc] init];
+        //        pickerVC.delegate = (id)self;
+        //        pickerVC.allowsEditing = NO;
+        //        pickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //        [weakSelf presentViewController:pickerVC animated:YES completion:nil];
         
         
     }];
@@ -139,11 +139,15 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.5;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return 0.01;
     } else {
-        return 10;
+        return 5;
     }
 }
 
@@ -156,7 +160,7 @@
                 [self settingInformation];
                 break;
             case 1:
-                [self cleanTheMemory];
+                [self resetThepassWord];
                 break;
             case 2:
                 [self helpViewController];
@@ -190,15 +194,18 @@
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 
-#pragma mark  > 清除缓存的操作 <
-- (void)cleanTheMemory{
-    NSLog(@"清除缓存");
+#pragma mark  > 重置密码的操作 <
+- (void)resetThepassWord{
+    NSLog(@"重置密码");
+    UIStoryboard *resetSB = [UIStoryboard storyboardWithName:@"login" bundle:[NSBundle mainBundle]];
+    UIViewController *resetPwdVC = [resetSB instantiateViewControllerWithIdentifier:@"YSResetPassWordViewController"];
+    [self.navigationController pushViewController:resetPwdVC animated:YES];
 }
 
 #pragma mark  > 帮助控制器 <
 - (void)helpViewController{
     
-    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"帮助" message:@"1、首页是推荐的\n2、随便看看是随机推荐的\n3、推荐是对早中晚三餐的推荐\n4、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"帮助" message:@"1、首页是显示所有的心情\n2、个人发表的状态的展示\n3、加号是发表自己的心情\n4、对附近经典的推荐\n5、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
     
     [alertContorller addAction:alertAction];
@@ -207,7 +214,7 @@
 
 #pragma mark  > 功能介绍 <
 - (void)functionViewController{
-    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"功能介绍" message:@"1、首页是推荐的\n2、随便看看是随机推荐的\n3、推荐是对早中晚三餐的推荐\n4、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"功能介绍" message:@"1、首页是显示所有的心情\n2、个人发表的状态的展示\n3、加号是发表自己的心情\n4、对附近经典的推荐\n5、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
     
     [alertContorller addAction:alertAction];
@@ -217,18 +224,30 @@
 #pragma mark  > 切换账号的操作 <
 - (void)changeTheUser{
     NSLog(@"退出登录");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"headerImage"];
-    [defaults removeObjectForKey:@"nickName"];
-    [defaults removeObjectForKey:@"gender"];
-    [defaults removeObjectForKey:@"age"];
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"是否要切换账号" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"headerImage"];
+        [defaults removeObjectForKey:@"nickName"];
+        [defaults removeObjectForKey:@"gender"];
+        [defaults removeObjectForKey:@"age"];
+        
+        [AVUser logOut];  //清除缓存用户对象
+        AVUser *currentUser = [AVUser currentUser]; // 现在的currentUser是nil了
+        NSLog(@"退出登录后>>>>%@",currentUser.username);
+        // 退出账号登录的操作；
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [app loadMainController];
+        
+    }];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        
+    }];
+    [alertContorller addAction:alAction];
+    [alertContorller addAction:alertAction];
+    [self presentViewController:alertContorller animated:YES completion:nil];
     
-    [AVUser logOut];  //清除缓存用户对象
-    AVUser *currentUser = [AVUser currentUser]; // 现在的currentUser是nil了
-    NSLog(@"退出登录后>>>>%@",currentUser.username);
-    // 退出账号登录的操作；
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app loadMainController];
 }
 
 
@@ -246,13 +265,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

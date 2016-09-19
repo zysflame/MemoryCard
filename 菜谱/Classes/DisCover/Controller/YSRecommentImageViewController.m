@@ -14,6 +14,8 @@
 /** 存放的数据*/
 @property (nonatomic, strong) NSMutableArray *arrData;
 
+@property (nonatomic, weak) UIView *selectedView;
+
 @end
 
 static NSString * const reuseIdentifier = @"image";
@@ -73,7 +75,7 @@ static NSString * const reuseIdentifier = @"image";
     self.collectionView = collectionView;
     // UICollectionView默认的背景色是黑色
     collectionView.backgroundColor = [UIColor whiteColor];
-    
+    collectionView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
     // 设置数据源
     collectionView.dataSource = self;
     // 设置代理
@@ -105,8 +107,29 @@ static NSString * const reuseIdentifier = @"image";
         cell.backgroundView = cellImageView;
     }
     // Configure the cell
-    
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UIView *selectView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.selectedView = selectView;
+    self.selectedView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    
+    UIImageView *bigImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, (YSScreenHeight - (YSScreenWidth - 10 * 2))/2.0, YSScreenWidth - 10 * 2,  YSScreenWidth - 10 * 2)];
+    NSString *strImage = [self.arrData objectAtIndex:indexPath.item];
+    NSURL *imageUrl = [NSURL URLWithString:strImage];
+    [bigImgView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"social-placeholder"]];
+    [self.selectedView addSubview:bigImgView];
+    
+    /**#warning  添加覆盖全屏的View*/
+    [[UIApplication sharedApplication].keyWindow addSubview:self.selectedView];
+    
+    //   给codeView添加手势
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView)];
+    [self.selectedView addGestureRecognizer:singleTap];
+    [UIView animateWithDuration:0.5 animations:^{
+    }];
 }
 
 - (void)requestTheInformation{
@@ -115,7 +138,7 @@ static NSString * const reuseIdentifier = @"image";
     YSHTTPRequestManager *manager = [YSHTTPRequestManager sharedHTTPRequest];
     __weak typeof(self) weakSelf = self;
     [manager GETWithURL:strURL withParam:dic andRequestSuccess:^(id responseObject) {
-//        NSLog(@">>>>数据是%@",responseObject);
+        //        NSLog(@">>>>数据是%@",responseObject);
         NSArray *arr = responseObject[@"data"];
         NSUInteger count = arr.count;
         for (NSUInteger index = 0; index < count; index ++) {
@@ -123,12 +146,11 @@ static NSString * const reuseIdentifier = @"image";
             NSString *strImage = dic[@"image"];
             [weakSelf.arrData addObject:strImage];
         }
-        NSLog(@">>>%ld",weakSelf.arrData.count);
+        NSLog(@">>>%ld",(unsigned long)weakSelf.arrData.count);
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.collectionView reloadData];
         });
     } andRequestFailure:^(NSError *error) {
-        __weak typeof(self) weakSelf = self;
         UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"网络不好，请耐心等待" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
         }];
@@ -138,9 +160,15 @@ static NSString * const reuseIdentifier = @"image";
         }];
         [alertContorller addAction:alertDengLuAction];
         [alertContorller addAction:alertAction];
-        [self presentViewController:alertContorller animated:YES completion:nil];
+        [weakSelf presentViewController:alertContorller animated:YES completion:nil];
     }];
+    
+}
 
+// 点击屏幕
+- (void)tapView
+{
+    [self.selectedView removeFromSuperview];
 }
 
 
@@ -150,13 +178,13 @@ static NSString * const reuseIdentifier = @"image";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

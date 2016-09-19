@@ -47,7 +47,7 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView {
     static NSString *strId = @"YSStatusCell";
     YSStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:strId];
-    if (cell == nil) {
+    if (cell == nil){
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YSStatusCell" owner:nil options:nil] firstObject];
     }
     return cell;
@@ -68,8 +68,12 @@
     AVUser *currentUser = [AVUser currentUser];
     NSData *imageData  = [currentUser objectForKey:@"headerImage"];
     UIImage *imageHeader = [UIImage imageWithData:imageData];
-//    UIImage *imageHeader = [UIImage imageWithData:message.headerImv];
     [self.btnHead setImage:imageHeader forState:UIControlStateNormal];
+    //    if ([currentUser.username isEqualToString:message.userName]) {
+    //    }else{
+    //        UIImage *imageHeader = [UIImage imageWithData:message.headerImv];
+    //        [self.btnHead setImage:imageHeader forState:UIControlStateNormal];
+    //    }
     
     // 设置昵称
     self.lblName.text = message.nickName;
@@ -78,7 +82,7 @@
     //    self.lblTime.text = status.strTimeDes;
     
     // 设置时间  ----- 实际上是显示昵称
-//    self.lblSource.text = message.nickName;
+    //    self.lblSource.text = message.nickName;
     
     // 设置来源  ---- 时间上是显示 时间
     NSDate *update = message.updatedAt;
@@ -170,7 +174,7 @@
     for (NSUInteger index = 0; index < count; index ++) {
         UIImageView *imageView = [UIImageView new];
         imageView.image = [UIImage imageWithData:arrImageDatas[index]];
-//        [imageView sd_setImageWithURL:[NSURL URLWithString:arrImageDatas[index]] placeholderImage:[UIImage imageNamed:@"social-placeholder"]];
+        //        [imageView sd_setImageWithURL:[NSURL URLWithString:arrImageDatas[index]] placeholderImage:[UIImage imageNamed:@"social-placeholder"]];
         [view addSubview:imageView];
         CGFloat X = space + (index % lineCount) * (width + space);
         CGFloat Y = space + (index / lineCount) * (height + space);

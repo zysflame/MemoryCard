@@ -68,7 +68,7 @@
         NSInteger genderIndex = [object[@"gender"] integerValue];
         weakSelf.gender.selectedSegmentIndex = genderIndex;
     }];
-
+    
 }
 
 #pragma mark  > 数组的懒加载 <
@@ -81,7 +81,7 @@
 
 #pragma mark  > 保存数据的按钮 <
 - (IBAction)saveBtn:(id)sender {
-//    NSLog(@"保存数据信息。。。上传服务器，更新数据");
+    //    NSLog(@"保存数据信息。。。上传服务器，更新数据");
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -91,7 +91,7 @@
     [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [defaults setObject:imgData forKey:@"headerImage"];
         [defaults synchronize]; // 立即写入
-
+        
         [[AVUser currentUser] setObject:imgData forKey:@"headerImage"];
         [[AVUser currentUser] saveInBackground];
     }];
@@ -101,7 +101,7 @@
     [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [defaults setObject:self.txfNickName.text forKey:@"nickName"];
         [defaults synchronize]; // 立即写入
-
+        
         [[AVUser currentUser] setObject:self.txfNickName.text forKey:@"nickName"];
         [[AVUser currentUser] saveInBackground];
     }];
@@ -111,7 +111,7 @@
     [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [defaults setObject:[NSNumber numberWithInt:(int)self.gender.selectedSegmentIndex] forKey:@"gender"];
         [defaults synchronize]; // 立即写入
-
+        
         [[AVUser currentUser] setObject:[NSNumber numberWithInt:(int)self.gender.selectedSegmentIndex] forKey:@"gender"];
         [[AVUser currentUser] saveInBackground];
     }];
@@ -121,7 +121,7 @@
     [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [defaults setObject:self.txfAge.text forKey:@"age"];
         [defaults synchronize]; // 立即写入
-
+        
         [[AVUser currentUser] setObject:self.txfAge.text forKey:@"age"];
         [[AVUser currentUser] saveInBackground];
     }];
@@ -142,11 +142,11 @@
 - (IBAction)addHeaderBtn:(UIButton *)button {
     
     TZImagePickerController *imagepicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [imagepicker setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assest, BOOL isCan) {
-         weakSelf.headerImage = photos[0];
+        weakSelf.headerImage = photos[0];
         [button setImage:photos[0] forState:UIControlStateNormal];
-    
+        
     }];
     [self presentViewController:imagepicker animated:YES completion:nil];
 }
@@ -162,13 +162,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

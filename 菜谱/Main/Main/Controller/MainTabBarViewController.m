@@ -54,36 +54,44 @@
     [self.tabBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
     [self.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]];
     
-    YSHomeViewController *HomeVC = [YSHomeViewController new];
-    [self addViewController:HomeVC WithImageName:@"tabbar_hote" Title:@"热门"];
+    YSRecommendViewController *discoverVC = [YSRecommendViewController new];
+    [self addViewController:discoverVC WithImageName:@"tabbar_hote" Title:@"热门推荐"];
+    
+    //    YSHomeViewController *HomeVC = [YSHomeViewController new];
+    //    [self addViewController:HomeVC WithImageName:@"tabbar_hote" Title:@"其他动态"];
     
     YSDynamicViewController *dynamicVC = [YSDynamicViewController new];
-    [self addViewController:dynamicVC WithImageName:@"tabbar_menu" Title:@"个人动态"];
-    
-    YSRecommendViewController *discoverVC = [YSRecommendViewController new];
-    [self addViewController:discoverVC WithImageName:@"tabar_discover" Title:@"附近的推荐"];
-    [UIImage imageNamed:@"tabbar_menu"];
+    [self addViewController:dynamicVC WithImageName:@"me" Title:@"个人动态"];
     
     YSProfileViewController *profileVC = [YSProfileViewController new];
-    [self addViewController:profileVC WithImageName:@"tabbar_profile" Title:@"我的设置"];
+    [self addViewController:profileVC WithImageName:@"CoolDian" Title:@"我的设置"];
     
     // 创建自己的TabBar
     YSTabBar *tabBar = [YSTabBar new];
     //self.tabBar = tabBar;
     tabBar.tintColor = [UIColor orangeColor];
     tabBar.barTintColor = [UIColor lightTextColor];
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [tabBar setBlkTapThePlusBtn:^(UIButton *button) {
         // 点击加号按钮触发的事件
+        UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:nil message:@"添加心情" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *sendAction = [UIAlertAction actionWithTitle:@"添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            UIStoryboard *addSB = [UIStoryboard storyboardWithName:@"Add" bundle:[NSBundle mainBundle]];
+            UIViewController *addVC = [addSB instantiateViewControllerWithIdentifier:@"YSSendMessageViewController"];
+            YSNavigationViewController *naviVC = [[YSNavigationViewController alloc] initWithRootViewController:addVC];
+            [weakSelf presentViewController:naviVC animated:YES completion:nil];
+            
+        }];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            
+        }];
+        [alertContorller addAction:sendAction];
+        [alertContorller addAction:alertAction];
+        [self presentViewController:alertContorller animated:YES completion:nil];
         
-        UIStoryboard *addSB = [UIStoryboard storyboardWithName:@"Add" bundle:[NSBundle mainBundle]];
-        UIViewController *addVC = [addSB instantiateViewControllerWithIdentifier:@"YSSendMessageViewController"];
         
-//        YSAddViewController *addVC = [YSAddViewController new];
-        YSNavigationViewController *naviVC = [[YSNavigationViewController alloc] initWithRootViewController:addVC];
-        [weakSelf presentViewController:naviVC animated:YES completion:nil];
     }];
-    [self setValue:tabBar forKey:@"tabBar"];
+    //    [self setValue:tabBar forKey:@"tabBar"];
 }
 
 

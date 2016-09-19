@@ -18,7 +18,7 @@
 + (void)initialize{
     UINavigationBar *naviBar = [UINavigationBar appearance];
     
-    naviBar.tintColor = [UIColor purpleColor];
+    naviBar.tintColor = [UIColor lightGrayColor];
 }
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

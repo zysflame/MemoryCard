@@ -9,7 +9,7 @@
 #import "YSCarouselImageView.h"
 #import "UIImageView+WebCache.h"
 
-@interface YSCarouselImageView ()
+@interface YSCarouselImageView () <CAAnimationDelegate>
 
 @property (nonatomic,strong) UIImageView *imageView;
 

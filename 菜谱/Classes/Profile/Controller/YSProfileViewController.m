@@ -163,10 +163,10 @@
                 [self resetThepassWord];
                 break;
             case 2:
-                [self helpViewController];
+                [self functionViewController];
                 break;
             case 3:
-                [self functionViewController];
+                [self helpViewController];
                 break;
             default:
                 break;

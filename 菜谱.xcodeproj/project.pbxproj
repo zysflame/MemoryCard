@@ -506,12 +506,12 @@
 		CCDFBAB71D6DC5C9000A16C9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CCDFBAD71D6DC5C9000A16C9 /* Home */,
+				CCDFBACB1D6DC5C9000A16C9 /* DisCover */,
 				CCDFBAD11D6DC5C9000A16C9 /* Dynamic */,
 				CCDFBAC51D6DC5C9000A16C9 /* Add */,
-				CCDFBACB1D6DC5C9000A16C9 /* DisCover */,
 				CCDFBAE11D6DC5C9000A16C9 /* Profile */,
 				CCDFBAB81D6DC5C9000A16C9 /* Account */,
+				CCDFBAD71D6DC5C9000A16C9 /* Home */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -830,6 +830,7 @@
 				TargetAttributes = {
 					CC3EB7191D63F7EF000E775B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 73W72LVS68;
 					};
 				};
 			};
@@ -1107,7 +1108,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 73W72LVS68;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "菜谱/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = "菜谱/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -1124,7 +1127,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 73W72LVS68;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "菜谱/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = "菜谱/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

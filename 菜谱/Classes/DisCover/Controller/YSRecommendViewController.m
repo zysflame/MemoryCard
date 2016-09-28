@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadDefaultSetting];
-    //    [self loadNavigationSetting];
+//    [self loadNavigationSetting];
 }
 
 #pragma mark 加载导航栏设置
@@ -111,11 +111,16 @@
     __weak typeof(self) weakSelf = self;
     [reverseGeocoder reverseGeocodeLocation:userLocation.location completionHandler:^(NSArray *placemarks, NSError *error)
      {
-         CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
-         NSString *cityName = myPlacemark.locality;
-         //         NSLog(@"My country code: %@", cityName);
-         [weakSelf requestTheInformationWithCityName:cityName WithTheLocation:userLocation.location];
-         [_locService stopUserLocationService];
+         if (placemarks.count > 0) {
+             CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
+             if (myPlacemark != nil) {
+                 
+                 NSString *cityName = myPlacemark.locality;
+//                 NSLog(@"My country code: %@", cityName);
+                 [weakSelf requestTheInformationWithCityName:cityName WithTheLocation:userLocation.location];
+                 [_locService stopUserLocationService];
+             }
+         }
      }];
 }
 

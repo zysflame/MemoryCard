@@ -196,7 +196,7 @@
 
 #pragma mark  > 重置密码的操作 <
 - (void)resetThepassWord{
-    NSLog(@"重置密码");
+//    NSLog(@"重置密码");
     UIStoryboard *resetSB = [UIStoryboard storyboardWithName:@"login" bundle:[NSBundle mainBundle]];
     UIViewController *resetPwdVC = [resetSB instantiateViewControllerWithIdentifier:@"YSResetPassWordViewController"];
     [self.navigationController pushViewController:resetPwdVC animated:YES];
@@ -205,7 +205,7 @@
 #pragma mark  > 帮助控制器 <
 - (void)helpViewController{
     
-    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"帮助" message:@"1、首页是显示所有的心情\n2、个人发表的状态的展示\n3、加号是发表自己的心情\n4、对附近经典的推荐\n5、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"帮助" message:@"1、首页是根据当前所在的城市来推荐游玩的地方\n2、个人发表的心情的展示及发表\n3、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
     
     [alertContorller addAction:alertAction];
@@ -214,7 +214,7 @@
 
 #pragma mark  > 功能介绍 <
 - (void)functionViewController{
-    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"功能介绍" message:@"1、首页是显示所有的心情\n2、个人发表的状态的展示\n3、加号是发表自己的心情\n4、对附近经典的推荐\n5、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"功能介绍" message:@"1、首页是根据当前所在的城市来推荐游玩的地方\n2、个人发表的心情的展示及发表\n3、我的是一些基本设置" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
     
     [alertContorller addAction:alertAction];

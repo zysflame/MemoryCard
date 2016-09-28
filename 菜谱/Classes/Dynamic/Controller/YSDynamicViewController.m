@@ -40,6 +40,7 @@
     [self requestTheData];
 }
 
+#pragma mark  > 请求数据 <
 - (void)requestTheData{
     AVQuery *query = [AVQuery queryWithClassName:@"YSCurrentMessage"];
     __weak typeof(self) weakSelf = self;
@@ -63,7 +64,7 @@
         //        NSLog(@">>>%ld",messageData.count);
         for (YSCurrentMessage *message in messageData) {
             if ([message.userName isEqualToString:[AVUser currentUser].username]) {
-                NSLog(@"message>>>>>>%ld",message.arrImages.count);
+                NSLog(@"message>>>>>>%ld",(unsigned long)message.arrImages.count);
                 [weakSelf.arrDataModels addObject:message];
             }
         }

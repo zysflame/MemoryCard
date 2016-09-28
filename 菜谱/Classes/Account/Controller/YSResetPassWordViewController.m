@@ -99,8 +99,8 @@
         [self.timer invalidate];  // 计时器失效
     }else{
         self.YZMNewBtn.enabled = NO;
-        self.YZMNewBtn.titleLabel.text = [NSString stringWithFormat:@"%luS可重发",self.count];
-        [self.YZMNewBtn setTitle:[NSString stringWithFormat:@"%luS可重发",self.count] forState: UIControlStateDisabled];
+        self.YZMNewBtn.titleLabel.text = [NSString stringWithFormat:@"%luS可重发",(long)self.count];
+        [self.YZMNewBtn setTitle:[NSString stringWithFormat:@"%luS可重发",(long)self.count] forState: UIControlStateDisabled];
     }
 }
 

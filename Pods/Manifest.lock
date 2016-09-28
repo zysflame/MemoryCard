@@ -42,7 +42,7 @@ DEPENDENCIES:
   - AVOSCloud
   - AVOSCloudCrashReporting
   - AVOSCloudIM
-  - BaiduMapKit (~> 3.0.0)
+  - BaiduMapKit
   - LeanCloudSocial
   - Masonry (~> 1.0.1)
   - MJExtension (~> 3.0.13)
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TZImagePickerController: 1f8c9186e6fcfd949cfed563770bf426a049edd6
 
-PODFILE CHECKSUM: 91d66ab0992d0ea9111f5c69da6dfacbad84dd2c
+PODFILE CHECKSUM: 61aca890372286772d89e8cb09f3836fc612ad43
 
 COCOAPODS: 1.0.1

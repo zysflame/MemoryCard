@@ -47,7 +47,7 @@
     if (count == 0) {
         [button setTitle:title forState:UIControlStateNormal];
     } else {
-        [button setTitle:[NSString stringWithFormat:@"%ld", count] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%ld", (long)count] forState:UIControlStateNormal];
     }
 }
 

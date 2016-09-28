@@ -138,7 +138,7 @@ static NSString * const strId = @"Image";
 #pragma mark  > UICollectionView 的代理事件 <
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        NSLog(@"点击了第一组>>%ld",indexPath.item);
+        NSLog(@"点击了第一组>>%ld",(long)indexPath.item);
     }else{
         TZImagePickerController *imagepickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:maxNumImage delegate:self];
         __weak typeof(self) weakSelf = self;
@@ -164,6 +164,14 @@ static NSString * const strId = @"Image";
     self.navigationItem.leftBarButtonItem = itemWrong;
     
     UIBarButtonItem *itemSend = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(clickTheSendBtn:)];
+//    UIButton *senBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    senBtn.frame = CGRectMake(0, 0, 80, 40);
+//    [senBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//    
+//    [senBtn setTitle:@"发送" forState:UIControlStateNormal];
+////    [senBtn setTitle:@"发送中。。。" forState:UIControlStateDisabled];
+//    [senBtn addTarget:self action:@selector(clickTheSendBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:senBtn];
     self.navigationItem.rightBarButtonItem = itemSend;
 }
 
@@ -181,13 +189,13 @@ static NSString * const strId = @"Image";
         NSData *imageData = UIImageJPEGRepresentation(self.arrMImages[index], 1);
         [arrMImageDatas addObject:imageData];
     }
-    
-    AVUser *currentUser = [AVUser currentUser];
+    button.enabled = YES;
     
     YSCurrentMessage *message = [YSCurrentMessage object];
-    message.userName = currentUser.username;
-    message.nickName = [currentUser objectForKey:@"nickName"];
-    message.headerImv = [currentUser objectForKey:@"headerImage"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    message.userName = [defaults objectForKey:@"username"];;
+    message.nickName = [defaults objectForKey:@"nickName"];
+    message.headerImv = [defaults objectForKey:@"headerImage"];
     
     message.content = self.textViewBack.text;
     message.arrImages = [arrMImageDatas copy];
@@ -195,6 +203,17 @@ static NSString * const strId = @"Image";
     [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"发送失败" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                button.enabled = YES;
+            }];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                button.enabled = YES;
+            }];
+            [alertContorller addAction:alAction];
+            [alertContorller addAction:alertAction];
+            [self presentViewController:alertContorller animated:YES completion:nil];
         }
     }];
     

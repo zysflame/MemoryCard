@@ -22,11 +22,14 @@
 #import "YSCarouselImageView.h"
 #import "UIView+Frame.h"
 
+#import "YSCurrentMessage.h"
+
 static NSInteger page = 1;
 @interface YSHomeViewController () <UITableViewDelegate,UITableViewDataSource,YSCarouselImageViewDelegate>
 /** tableView 视图*/
 @property (nonatomic, weak) UITableView *tableView;
-
+/** 动画的图片的网址*/
+@property (nonatomic, copy) NSArray *imgNames;
 /** 存放模型的数组*/
 @property (nonatomic, strong) NSMutableArray *arrDataModels;
 @property (nonatomic,weak) YSCarouselImageView *carouselImageView;
@@ -36,47 +39,71 @@ static NSInteger page = 1;
 
 @implementation YSHomeViewController
 
-- (NSArray *)arrDataModels{
-    if (!_arrDataModels) {
-        NSString *strFilePath=[[NSBundle mainBundle] pathForResource:@"status" ofType:@"plist"];
-        NSDictionary *dicStatuses=[NSDictionary dictionaryWithContentsOfFile:strFilePath];
-        NSArray *arrStatuses=dicStatuses[@"statuses"];
-        NSMutableArray *arrMStatusModels=[NSMutableArray arrayWithCapacity:arrStatuses.count];
-        for (NSDictionary *dicData in arrStatuses) {
-            YSStatusModel *status = [YSStatusModel statusModelWithDictionary:dicData];
-            [arrMStatusModels addObject:status];
-        }
-        _arrDataModels = [arrMStatusModels copy];
-        
+- (NSArray *)imgNames{
+    if (!_imgNames) {
+        _imgNames = @[@"http://www.dns001.com/uploads/allimg/160403/19292I293-3.jpg",
+                      
+                      @"http://img.wallpapersking.com/800/2012-8/20120812103710.jpg",
+                      
+                      @"http://www.517europe.com.cn/upload/2014/08/201408061251224341.jpg",
+                      
+                      @"http://test.beiguoyou.com/upfiles/2014-11-26/e81864232f494af3986d0bcd10325afc0.jpg",
+                      
+                      @"http://www.xcghj.gov.cn/upimage/20131127142139.JPG"
+                      ];
     }
-    return _arrDataModels;
+    return _imgNames;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-//    [self requestInformation];
+    //    [self requestInformation];
+    [self requestTheData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNavigationSetting];
+    //    [self loadNavigationSetting];
     [self loadDefaultSetting];
-//    [self text];
 }
 
-- (void)text{
-    NSString *str = [[AVUser currentUser] objectForKey:@"ResponseObject"];
-    NSLog(@"str>>%@",str);
-    AVQuery *query = [AVQuery queryWithClassName:@"ResponseObject"];
-    [query getObjectInBackgroundWithId:str block:^(AVObject *object, NSError *error) {
-        NSLog(@"%@>>>>%@",object,object.allKeys);
+- (void)requestTheData{
+    AVQuery *query = [AVQuery queryWithClassName:@"YSCurrentMessage"];
+    __weak typeof(self) weakSelf = self;
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            //NSLog(@"查询失败>>> %@",error);
+            UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"网络不好或者您没有发过心情。。。" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回去发表心情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            }];
+            UIAlertAction *alertDengLuAction = [UIAlertAction actionWithTitle:@"刷新试试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakSelf requestTheData];
+            }];
+            [alertContorller addAction:alertDengLuAction];
+            [alertContorller addAction:alertAction];
+            [self presentViewController:alertContorller animated:YES completion:nil];
+        }
+        NSArray<YSCurrentMessage *> *messageData = objects;
+        weakSelf.arrDataModels = [NSMutableArray arrayWithCapacity:messageData.count];
+        for (YSCurrentMessage *message in messageData) {
+            if (![message.userName isEqualToString:[AVUser currentUser].username]) {
+                [weakSelf.arrDataModels addObject:message];
+            }
+        }
+        //        NSLog(@">>>%ld",weakSelf.arrDataModels.count);
+        // 刷新 UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     }];
+    
 }
+
 
 #pragma mark 加载默认设置
 - (void)loadDefaultSetting{
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-//    CGRect tableViewFrame = CGRectMake(0, 200, YSScreenWidth, YSScreenHeight - 200);
+    //    self.automaticallyAdjustsScrollViewInsets = NO;
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
     
@@ -86,32 +113,17 @@ static NSInteger page = 1;
     
     tableView.sectionFooterHeight = 30;
     tableView.estimatedRowHeight = 40;
-//    __weak typeof(self) weakSelf = self;
-//    [self.tableView addGifRefreshHeaderWithClosure:^{
-//        [weakSelf loadNewData];
-//    }];
-//    [self.tableView addGifRefreshFooterWithClosure:^{
-//        [weakSelf loadNewData];
-//    }];
     
-    NSArray *imgNames = @[@"http://www.dns001.com/uploads/allimg/160403/19292I293-3.jpg",
-                          
-                          @"http://img.wallpapersking.com/800/2012-8/20120812103710.jpg",
-                          
-                          @"http://www.517europe.com.cn/upload/2014/08/201408061251224341.jpg",
-                          
-                          @"http://test.beiguoyou.com/upfiles/2014-11-26/e81864232f494af3986d0bcd10325afc0.jpg",
-                          
-                          @"http://www.xcghj.gov.cn/upimage/20131127142139.JPG"
-                          ];
+    self.arrDataModels = [NSMutableArray array];
     
-    YSCarouselImageView *carouselImageView = [[YSCarouselImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200) withBannerSource:DGBBannerStyleOnlyWebSource withBannerArray:imgNames];
+    
+    YSCarouselImageView *carouselImageView = [[YSCarouselImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200) withBannerSource:DGBBannerStyleOnlyWebSource withBannerArray:self.imgNames];
     carouselImageView.showPageControl = YES;
     carouselImageView.delegate = self;
     carouselImageView.timeInterval = 3;
-    tableView.tableHeaderView = carouselImageView;
+    //    tableView.tableHeaderView = carouselImageView;
     self.carouselImageView = carouselImageView;
-
+    
 }
 
 #pragma mark  > 拖动图片的操作 <
@@ -123,7 +135,7 @@ static NSInteger page = 1;
 
 - (void)dgbCarouselImageView:(YSCarouselImageView *)carouselImageView didSelectItemAtIndex:(NSInteger)index {
     // 点击图片触发的事件
-    NSLog(@"%ld点击了图片的下标",index);
+    //    NSLog(@"%ld点击了图片的下标",index);
     
 }
 
@@ -180,10 +192,10 @@ static NSInteger page = 1;
         [alertContorller addAction:alertDengLuAction];
         [alertContorller addAction:alertAction];
         [self presentViewController:alertContorller animated:YES completion:nil];
-
+        
     }];
     
-       
+    
 }
 
 #pragma mark 加载导航栏设置
@@ -209,24 +221,29 @@ static NSInteger page = 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    YSStatusCell *statusCell = [YSStatusCell cellWithTableView:tableView];
-    YSStatusModel *status = self.arrDataModels[indexPath.section];
-    statusCell.status = status;
-    return statusCell;
+    YSStatusCell *messageCell = [YSStatusCell cellWithTableView:tableView];
+    YSCurrentMessage *msg = self.arrDataModels[indexPath.section];
+    messageCell.message = msg;
+    return messageCell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    YSFooterView *footer = [YSFooterView footerViewWithTableView:tableView];
-    footer.contentView.backgroundColor = [UIColor whiteColor];
-    footer.status = self.arrDataModels[section];
-    return footer;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    YSFooterView *footer = [YSFooterView footerViewWithTableView:tableView];
+//    footer.contentView.backgroundColor = [UIColor whiteColor];
+//    footer.status = self.arrDataModels[section];
+//    return nil;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // 取消IndexPath位置cell的选中状态
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     YSHomeInfoViewController *homeInfoVC = [YSHomeInfoViewController new];
+    YSCurrentMessage *msg = self.arrDataModels[indexPath.section];
+    homeInfoVC.currentMessage = msg;
     [self.navigationController pushViewController:homeInfoVC animated:YES];
 }
 
@@ -245,13 +262,13 @@ static NSInteger page = 1;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

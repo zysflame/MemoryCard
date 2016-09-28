@@ -77,6 +77,7 @@
 		CCF3C29E1D75B7D6005EFAA9 /* YSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C2981D75B7D6005EFAA9 /* YSLoginViewController.m */; };
 		CCF3C29F1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C29A1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m */; };
 		CCF3C2A01D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF3C29C1D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m */; };
+		CCF70F241D916B7700A83003 /* Message.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCF70F221D916B7700A83003 /* Message.xcdatamodeld */; };
 		CCF79CB91D782A2000640965 /* YSResetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF79CB81D782A2000640965 /* YSResetPassWordViewController.m */; };
 		CCF79CBB1D782B3400640965 /* login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF79CBA1D782B3400640965 /* login.storyboard */; };
 		CCFE91AF1D80141F00E12C2B /* YSMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFE91AE1D80141F00E12C2B /* YSMessageModel.m */; };
@@ -212,6 +213,7 @@
 		CCF3C29A1D75B7D6005EFAA9 /* YSPhoneNumYanZhengVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPhoneNumYanZhengVC.m; sourceTree = "<group>"; };
 		CCF3C29B1D75B7D6005EFAA9 /* YSPhoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPhoneRegisterViewController.h; sourceTree = "<group>"; };
 		CCF3C29C1D75B7D6005EFAA9 /* YSPhoneRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPhoneRegisterViewController.m; sourceTree = "<group>"; };
+		CCF70F231D916B7700A83003 /* Message.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Message.xcdatamodel; sourceTree = "<group>"; };
 		CCF79CB71D782A2000640965 /* YSResetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSResetPassWordViewController.h; sourceTree = "<group>"; };
 		CCF79CB81D782A2000640965 /* YSResetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSResetPassWordViewController.m; sourceTree = "<group>"; };
 		CCF79CBA1D782B3400640965 /* login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = login.storyboard; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				CCF2DA881D86EA9100C792CC /* 原来的 */,
 				CC747E6C1D819D5500B5B360 /* YSSendMessageViewController.h */,
 				CC747E6D1D819D5500B5B360 /* YSSendMessageViewController.m */,
+				CCF70F221D916B7700A83003 /* Message.xcdatamodeld */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 					CC3EB7191D63F7EF000E775B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 73W72LVS68;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -947,6 +951,7 @@
 				CCAB06C41D854FB70032FABA /* YSRecommentInfoViewController.m in Sources */,
 				CCFFDDEF1D83A28A00F09E96 /* YSCarouselImageView.m in Sources */,
 				CCDFBB071D6DC607000A16C9 /* YSFooterView.m in Sources */,
+				CCF70F241D916B7700A83003 /* Message.xcdatamodeld in Sources */,
 				CCDFBB121D6DC65E000A16C9 /* YSStatusModel.m in Sources */,
 				CC2326861D66FFC8000EDC4B /* PINGifRefreshHeader.m in Sources */,
 				CC3EB75D1D63F99A000E775B /* YSNavigationViewController.m in Sources */,
@@ -1107,16 +1112,20 @@
 			baseConfigurationReference = B2D562325362028CEECAA5E5 /* Pods-菜谱.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 73W72LVS68;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "菜谱/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = "菜谱/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hnqingyun.memories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "菜谱/Classes/Add/Model/菜谱-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1126,16 +1135,19 @@
 			baseConfigurationReference = C00245FB0598FDC358C8080C /* Pods-菜谱.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 73W72LVS68;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "菜谱/Tools/PrefixHeader.pch";
 				INFOPLIST_FILE = "菜谱/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hnqingyun.memories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "菜谱/Classes/Add/Model/菜谱-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1162,6 +1174,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CCF70F221D916B7700A83003 /* Message.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCF70F231D916B7700A83003 /* Message.xcdatamodel */,
+			);
+			currentVersion = CCF70F231D916B7700A83003 /* Message.xcdatamodel */;
+			path = Message.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CC3EB7121D63F7EF000E775B /* Project object */;
 }

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YSCurrentMessage;
 
 @interface YSHomeInfoViewController : UIViewController
+
+/** 当前的信息*/
+@property (nonatomic, strong) YSCurrentMessage *currentMessage;
 
 @end

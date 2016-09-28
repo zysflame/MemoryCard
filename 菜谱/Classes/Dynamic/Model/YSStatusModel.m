@@ -30,7 +30,7 @@
     status.strSource = dicData[@"source"];
     
     /** favorited	boolean	是否已收藏，true：是，false：否 */
-    status.favorited = dicData[@"favorited"];
+//    status.favorited = dicData[@"favorited"];
     
     /** original_pic	string	原始图片地址，没有时不返回此字段 */
     status.strOriginalPic = dicData[@"original_pic"];

@@ -141,7 +141,7 @@
         NSURL *imageURL = [NSURL URLWithString:strImageUrl];
         
         NSArray *arrImage = basic[@"images"];
-        NSString *strImvCount = [NSString stringWithFormat:@"%ld 张美图",arrImage.count];
+        NSString *strImvCount = [NSString stringWithFormat:@"%ld 张美图",(unsigned long)arrImage.count];
         
         YSCommentRequestModel *model = [YSCommentRequestModel commentRequestModelWithDictionary:basic[@"comment"]];
         weakSelf.title = model.sightName;

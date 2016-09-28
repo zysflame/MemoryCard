@@ -70,10 +70,12 @@
         return;
     }
     sender.enabled = NO;
+    NSLog(@">>>>时间%@",[NSDate date]);
     __weak typeof(self) weakSelf = self;
     [AVUser logInWithUsernameInBackground:self.txfUserName.text password:self.txfPWD.text block:^(AVUser *user, NSError *error) {
-        if (user != nil) {
+        if (!error) {
             NSLog(@"登录成功");
+            NSLog(@">>>>时间%@",[NSDate date]);
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; // 保存
             [defaults setObject:user.username forKey:@"username"];
             NSData *imageData = [user objectForKey: @"headerImage"];
@@ -83,6 +85,7 @@
             [defaults setObject:[user objectForKey:@"age"] forKey:@"age"];
             [defaults synchronize]; // 立即写入
             
+            NSLog(@">>>>时间%@",[NSDate date]);
             MainTabBarViewController *mainVC = [MainTabBarViewController new];
             [weakSelf presentViewController:mainVC animated:YES completion:nil];
             
@@ -90,18 +93,35 @@
             weakSelf.txfPWD.text = nil;
         } else {
             NSLog(@"登录失败>>>%@",error);
-            __weak typeof(self) weakSelf = self;
-            UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"账号密码错误请重试。。。" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-            }];
-            UIAlertAction *alertDengLuAction = [UIAlertAction actionWithTitle:@"重新登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSLog(@"刷新了一下");
-                sender.enabled = YES;
-            }];
-            [alertContorller addAction:alertDengLuAction];
-            [alertContorller addAction:alertAction];
-            [self presentViewController:alertContorller animated:YES completion:nil];
+            
+            if (error.code == -1001) {
+                UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"网络问题，请查看您的网络链接" preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                    sender.enabled = YES;
+                }];
+                
+                [alertContorller addAction:alertAction];
+                [self presentViewController:alertContorller animated:YES completion:nil];
+            }else if (error.code == 210){
+                UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"请查看您的手机号与密码是否正确" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                    sender.enabled = YES;
+//                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                }];
+                [alertContorller addAction:alertAction];
+                [self presentViewController:alertContorller animated:YES completion:nil];
+            }else{
+                NSString *strMessage = [NSString stringWithFormat:@"错误码是:%ld",(long)error.code];
+                UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:@"友情提示" message:strMessage preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                    sender.enabled = YES;
+                }];
+                
+                [alertContorller addAction:alertAction];
+                [self presentViewController:alertContorller animated:YES completion:nil];
+            }
         }
     }];
     
